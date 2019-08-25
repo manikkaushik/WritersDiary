@@ -17,8 +17,15 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import com.tenovaters.android.writer.R;
+import com.tenovaters.android.writer.guest;
 import com.tenovaters.android.writer.ui.login.LoginViewModel;
 import com.tenovaters.android.writer.ui.login.LoginViewModelFactory;
 
@@ -30,6 +37,22 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // MY code starts here
+       //TODO: solve this error
+        button = (Button) findViewById(R.id.guest_mode);
+
+        // Capture button clicks
+        button.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+
+                // Start NewActivity.class
+                Intent myIntent = new Intent(LoginActivity.this,
+                        guest.class);
+                startActivity(myIntent);
+        // MY code ends here
+
+
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
@@ -124,4 +147,6 @@ public class LoginActivity extends AppCompatActivity {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
+    // MY code starts here
+
 }

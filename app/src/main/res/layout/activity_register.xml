@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <TextView
@@ -25,7 +25,7 @@
                 android:fontFamily="@font/my_beautiful_font"
                 android:text="@string/title"
                 android:textColor="#FFFFFF"
-                android:textSize="86dp"
+                android:textSize="86sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/loading"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:paddingLeft="30dp"

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "474213018460",
+    "firebase_url": "https://writersdiary.firebaseio.com",
+    "project_id": "writersdiary",
+    "storage_bucket": "writersdiary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474213018460:android:8f0cd1ae57d15662",
+        "android_client_info": {
+          "package_name": "com.tenovaters.android.writer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474213018460-91aa8f10d22pfadni28geoeqctv21uu7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tenovaters.android.writer",
+            "certificate_hash": "172a013f72696696e49f804cd2e6dd1e619f55df"
+          }
+        },
+        {
+          "client_id": "474213018460-qds7jp03tj081rn48jvcv2l44f2vibiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQTsd17V7PbyQjhuPvc5kNWNq7DCKn3HU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474213018460-qds7jp03tj081rn48jvcv2l44f2vibiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText emailid,password;
     private Button register;
     private FirebaseAuth auth;
-    ProgressDialog progressDialog;
+    ProgressBar pro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         password=(EditText)findViewById(R.id.password_reg);
 
         register=(Button)findViewById(R.id.regiter_reg);
+        pro=(ProgressBar)findViewById(R.id.loading_reg);
 
         auth = FirebaseAuth.getInstance();
 
@@ -44,14 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
                     String email = emailid.getText().toString().trim();
                     String passwordid = password.getText().toString().trim();
 
-
-
-                    progressDialog= new ProgressDialog(RegisterActivity.this);
-                    progressDialog.setTitle("Register");
-                    progressDialog.setMessage("Creating Your Account");
-
-                    progressDialog.setCanceledOnTouchOutside(false);
-                    progressDialog.setCancelable(false);
 
                     if(TextUtils.isEmpty(email)){
                         Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
@@ -67,13 +61,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }
                     else{
-                        progressDialog.show();
+                        pro.setVisibility(View.VISIBLE);
                         auth.createUserWithEmailAndPassword(email, passwordid)
                                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete: " + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-                                        progressDialog.dismiss();
+                                        pro.setVisibility(View.GONE);
                                         if (!task.isSuccessful()) {
                                             Toast.makeText(getApplicationContext(), "Either there is some error or Email already exist", Toast.LENGTH_SHORT).show();
                                         } else {

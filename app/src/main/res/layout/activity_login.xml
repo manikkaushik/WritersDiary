@@ -10,7 +10,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
    <RelativeLayout
        android:layout_marginTop="30dp"
@@ -78,14 +78,25 @@
            android:textColor="@color/black"
            android:text="@string/action_sign_in" />
 
+       <ProgressBar
+           android:id="@+id/loading"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/login"
+           android:layout_centerHorizontal="true"
+           android:layout_gravity="center"
+           android:layout_marginTop="30dp"
+           android:layout_marginBottom="30dp"
+           android:visibility="gone" />
+
        <Button
            android:id="@+id/regiter"
-           android:layout_below="@+id/login"
+           android:layout_below="@+id/loading"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_gravity="center"
            android:layout_centerHorizontal="true"
-           android:layout_marginTop="30dp"
+           android:layout_marginTop="20dp"
            android:paddingLeft="30dp"
            android:paddingRight="30dp"
            android:background="@drawable/round_fill"
@@ -96,27 +107,19 @@
     <Button
         android:id="@+id/guest_mode"
         android:layout_below="@+id/regiter"
-        android:layout_width="150sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="60dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="48dp"
         android:textColor="@color/black"
         android:text="@string/action_guest_mode"
         android:background="@drawable/round_fill" />
 
-       <ProgressBar
-           android:id="@+id/loading"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_below="@+id/guest_mode"
-           android:layout_centerHorizontal="true"
-           android:layout_gravity="center"
-           android:layout_marginTop="10dp"
-           android:layout_marginBottom="30dp"
-           android:visibility="visible" />
+
     </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

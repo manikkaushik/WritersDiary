@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailid,passwordid;
     private Button signin;
     private FirebaseAuth auth;
-    ProgressDialog progressDialog;
+    ProgressBar pro;
     private Button guest;
     private Button register;
     private DatabaseReference databaseArtist;
@@ -62,15 +62,12 @@ public class LoginActivity extends AppCompatActivity {
         signin = (Button) findViewById(R.id.login);
         guest = (Button) findViewById(R.id.guest_mode);
         register = (Button) findViewById(R.id.regiter);
+        pro=(ProgressBar)findViewById(R.id.loading) ;
 
         auth = FirebaseAuth.getInstance();
 
         databaseArtist = FirebaseDatabase.getInstance().getReference("Feedback");
         databaseArtist.child("TEst").setValue("Fevehs");
-
-        progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setTitle("LOGIN");
-        progressDialog.setMessage("Logging You In");
 
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,13 +106,15 @@ public class LoginActivity extends AppCompatActivity {
                         return;
                     }
 
-                    progressDialog.show();
+
+                    pro.setVisibility(View.VISIBLE);
 
                     auth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    progressDialog.dismiss();
+
+                                    pro.setVisibility(View.GONE);
                                     if (!task.isSuccessful()) {
                                         // there was an error
 

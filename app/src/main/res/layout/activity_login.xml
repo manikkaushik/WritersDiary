@@ -20,9 +20,9 @@
 
        <TextView
            android:id="@+id/title"
-           android:layout_width="wrap_content"
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginLeft="40dp"
+           android:layout_marginLeft="20dp"
            android:fontFamily="@font/my_beautiful_font"
            android:text="@string/title"
            android:textColor="#FFFFFF"
@@ -47,36 +47,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/username"
+           android:id="@+id/pass_linear"
+           android:layout_marginTop="10dp"
+           android:orientation="horizontal">
+
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:layout_marginTop="10dp"
+        android:layout_weight="1"
         android:hint="@string/prompt_password"
-        android:imeActionLabel="@string/action_sign_in_short"
-        android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteX="146dp" />
 
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_gravity="center"
+               android:id="@+id/image_pass"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_viewrs_green"/>
+
+       </LinearLayout>
+
+       <TextView
+           android:id="@+id/forgetpassword"
+           android:layout_width="wrap_content"
+           android:layout_below="@+id/pass_linear"
+           android:layout_marginTop="20dp"
+           android:layout_centerHorizontal="true"
+           android:gravity="center"
+           android:layout_height="wrap_content"
+           android:text="Forget Password" />
 
        <Button
            android:id="@+id/login"
-           android:layout_below="@+id/password"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_gravity="center"
+           android:layout_below="@+id/forgetpassword"
            android:layout_centerHorizontal="true"
+           android:layout_gravity="center"
            android:layout_marginTop="30dp"
+           android:background="@drawable/round_fill"
            android:paddingLeft="30dp"
            android:paddingRight="30dp"
-           android:background="@drawable/round_fill"
-           android:textColor="@color/black"
-           android:text="@string/action_sign_in" />
+           android:text="@string/action_sign_in"
+           android:textColor="@color/black" />
 
        <ProgressBar
            android:id="@+id/loading"
@@ -110,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="60dp"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"

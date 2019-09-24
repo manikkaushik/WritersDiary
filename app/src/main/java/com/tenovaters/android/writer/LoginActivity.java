@@ -14,11 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,11 +47,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private EditText emailid,passwordid;
+    private TextView forgetpassword;
+    private ImageView img;
     private Button signin;
     private FirebaseAuth auth;
     ProgressBar pro;
     private Button guest;
     private Button register;
+    private int a=0;
     private DatabaseReference databaseArtist;
 
 
@@ -63,11 +69,57 @@ public class LoginActivity extends AppCompatActivity {
         guest = (Button) findViewById(R.id.guest_mode);
         register = (Button) findViewById(R.id.regiter);
         pro=(ProgressBar)findViewById(R.id.loading) ;
+        img=(ImageView)findViewById(R.id.image_pass);
+        forgetpassword=(TextView)findViewById(R.id.forgetpassword);
 
         auth = FirebaseAuth.getInstance();
 
         databaseArtist = FirebaseDatabase.getInstance().getReference("Feedback");
-        databaseArtist.child("TEst").setValue("Fevehs");
+
+
+        forgetpassword.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                        String email = emailid.getText().toString().trim();
+
+                        if (TextUtils.isEmpty(email)) {
+                            Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else{
+                            pro.setVisibility(View.VISIBLE);
+                            auth.sendPasswordResetEmail(email)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(LoginActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                                            }
+                                            pro.setVisibility(View.GONE);
+                                        }
+                                    });
+                        }
+
+            }
+        });
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(a==0){
+                    passwordid.setTransformationMethod(null);
+                    img.setImageResource(R.drawable.ic_viewrs_green);
+                    a=1;
+                }
+                else{
+                    passwordid.setTransformationMethod(new PasswordTransformationMethod());
+                    img.setImageResource(R.drawable.ic_viewrs_green);
+                    a=0;
+                }
+
+            }
+        });
 
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,4 +208,6 @@ public class LoginActivity extends AppCompatActivity {
         return have_MobileData || have_WIFI;
 
     }
+
+
 }

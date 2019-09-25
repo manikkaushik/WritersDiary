@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "474213018460-9cdrfcn057e5h8s1qi378fjbsoqcj61m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tenovaters.android.writer",
+            "certificate_hash": "3a05e0b5124b09f6541e6990809a86988cf2d0a6"
+          }
+        },
+        {
           "client_id": "474213018460-91aa8f10d22pfadni28geoeqctv21uu7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

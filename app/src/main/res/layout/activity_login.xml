@@ -84,6 +84,14 @@
            android:layout_height="wrap_content"
            android:text="Forget Password" />
 
+       <com.google.android.gms.common.SignInButton
+           android:id="@+id/sign_in_button"
+           android:layout_below="@+id/forgetpassword"
+           android:layout_marginTop="30dp"
+
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+
        <Button
            android:id="@+id/login"
            android:layout_width="wrap_content"

@@ -50,6 +50,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+//google sign in
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private Button sub,choose;
@@ -183,8 +188,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Write to SD Card
         try {
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File(sdCard.getAbsolutePath() + "/Android/data/com.tenovaters.android.writer/Images");
+          //  File sdCard = Environment.getExternalStorageDirectory();
+            File dir = new File(mypath.getAbsolutePath() + "/Android/data/com.tenovaters.android.writer/Images");
             dir.mkdirs();
 
             String fileName = String.format("%d.jpg", System.currentTimeMillis());
@@ -204,8 +209,10 @@ public class ProfileActivity extends AppCompatActivity {
             //refreshGallery(outFile);
         } catch (FileNotFoundException e) {
             print("FNF");
+            Toast.makeText(getApplicationContext(), "File not found" , Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "exception occoured" , Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } finally {
         }

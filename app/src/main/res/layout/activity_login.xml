@@ -84,14 +84,6 @@
            android:layout_height="wrap_content"
            android:text="Forget Password" />
 
-       <com.google.android.gms.common.SignInButton
-           android:id="@+id/sign_in_button"
-           android:layout_below="@+id/forgetpassword"
-           android:layout_marginTop="30dp"
-           app:colorScheme="light"
-
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
 
        <Button
            android:id="@+id/login"
@@ -140,13 +132,27 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="60dp"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:text="@string/action_guest_mode"
         android:background="@drawable/round_fill" />
+
+       <Button
+           android:layout_width="wrap_content"
+           android:id="@+id/sign_in_button"
+           android:layout_below="@+id/guest_mode"
+           android:layout_marginTop="30dp"
+           android:layout_centerHorizontal="true"
+           android:gravity="center"
+           android:text="Sign in with Google"
+           android:paddingLeft="20dp"
+           android:paddingRight="20dp"
+           android:layout_marginBottom="60dp"
+           android:textColor="@color/black"
+           android:background="@drawable/round_fill"
+           android:layout_height="wrap_content"/>
 
 
     </RelativeLayout>

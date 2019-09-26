@@ -105,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        databaseArtist = FirebaseDatabase.getInstance().getReference("Feedback");
 
 
         forgetpassword.setOnClickListener(new View.OnClickListener(){

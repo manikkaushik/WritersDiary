@@ -99,7 +99,6 @@ public class HomeActivity extends AppCompatActivity
         t1=(TextView)hView.findViewById(R.id.tv_drawerusername);
         t2=(TextView)hView.findViewById(R.id.tv_draweremail);
 
-
         if (user == null) {
             progressDialog.dismiss();
             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
@@ -174,7 +173,7 @@ public class HomeActivity extends AppCompatActivity
         }
         else {
             super.onBackPressed();
-            Toast.makeText(HomeActivity.this, "Check your ", Toast.LENGTH_LONG).show();
+            //Toast.makeText(HomeActivity.this, "Check your ", Toast.LENGTH_LONG).show();
 
         }
     }

@@ -1,5 +1,6 @@
 package com.tenovaters.android.writer;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -69,8 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         if (!task.isSuccessful()) {
                                             Toast.makeText(getApplicationContext(), "Either there is some error or Email already exist", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(getApplicationContext(), "Account created Successfully", Toast.LENGTH_SHORT).show();
-                                            auth.signOut();
+                                            sendemail();
                                         }
                                     }
                                 });
@@ -107,6 +108,30 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return have_MobileData || have_WIFI;
 
+    }
+
+    private void sendemail(){
+        FirebaseUser user=auth.getCurrentUser();
+        if(user!=null){
+            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(RegisterActivity.this, "Registeration Successsful. We have send you an email please verify it..",
+                                Toast.LENGTH_SHORT).show();
+                        auth.signOut();
+                        startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                        finish();
+                    }
+                    else{
+                        String error=task.getException().getMessage();
+                        Toast.makeText(RegisterActivity.this, error,
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+        }
     }
 
     @Override

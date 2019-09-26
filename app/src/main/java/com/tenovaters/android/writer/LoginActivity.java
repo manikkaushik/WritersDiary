@@ -39,6 +39,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.tenovaters.android.writer.ui.home.HomeFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button register;
     private int a=0;
     private DatabaseReference databaseArtist;
+    private Boolean emailAddressChecker;
 
     //a constant for detecting the login intent result
     private static final int RC_SIGN_IN = 234;
@@ -168,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(haveNetwork()){
-                    String email = emailid.getText().toString().trim();
+                    final String email = emailid.getText().toString().trim();
                     String password = passwordid.getText().toString().trim();
 
                     if (TextUtils.isEmpty(email)) {
@@ -198,13 +200,10 @@ public class LoginActivity extends AppCompatActivity {
                                     pro.setVisibility(View.GONE);
                                     if (!task.isSuccessful()) {
                                         // there was an error
-
                                         Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
 
                                     } else {
-                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                        finish();
+                                        emailverification();
                                     }
                                 }
 
@@ -307,6 +306,19 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    private void emailverification(){
+        FirebaseUser user = auth.getCurrentUser();
+        emailAddressChecker = user.isEmailVerified();
+        if(emailAddressChecker){
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+        }
+        else{
+            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                    Toast.LENGTH_SHORT).show();
+            auth.signOut();
+        }
+    }
 
     //this method is called on click
     private void signIn() {

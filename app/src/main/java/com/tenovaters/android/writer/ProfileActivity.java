@@ -188,8 +188,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Write to SD Card
         try {
-          //  File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File(mypath.getAbsolutePath() + "/Android/data/com.tenovaters.android.writer/Images");
+            //File sdCard = Environment.get();
+            File dir = new File(mypath + "/Android/data/com.tenovaters.android.writer/Images");
             dir.mkdirs();
 
             String fileName = String.format("%d.jpg", System.currentTimeMillis());
@@ -209,10 +209,10 @@ public class ProfileActivity extends AppCompatActivity {
             //refreshGallery(outFile);
         } catch (FileNotFoundException e) {
             print("FNF");
-            Toast.makeText(getApplicationContext(), "File not found" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "File Not Found" , Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), "exception occoured" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Exception Occured" , Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } finally {
         }

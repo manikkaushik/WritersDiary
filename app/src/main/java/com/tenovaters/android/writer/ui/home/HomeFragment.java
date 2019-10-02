@@ -41,10 +41,10 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mDataBase= FirebaseDatabase.getInstance().getReference("Reader").child("1234567890101112167");
+        //mDataBase= FirebaseDatabase.getInstance().getReference("Reader").child("1234567890101112167");
 
-        ReadersList user= new ReadersList("Dhamaka har jgha","Devesh","Dancing","devesh is a very good boy he is very stomg");
-        mDataBase.setValue(user);
+       // ReadersList user= new ReadersList("Dhamaka har jgha","Devesh","Dancing","devesh is a very good boy he is very stomg");
+       // mDataBase.setValue(user);
 
         mRecyclerView = (RecyclerView)root.findViewById(R.id.recycle_home);
         mRecyclerView.setHasFixedSize(true);

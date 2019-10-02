@@ -111,7 +111,6 @@ public class ProfileFragment extends Fragment {
 
                     if (UserAge != null) {
                         t2.setText(UserAge);
-
                     }
                 }
                 else{
@@ -145,15 +144,12 @@ public class ProfileFragment extends Fragment {
                             }
                         });
                         progressDialog.dismiss();
-
-
                     } else {
                         Toast.makeText(getContext(), "No Profile Picture", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                         pro.setVisibility(View.GONE);
                     }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getContext(), "Check your Internet Connection", Toast.LENGTH_SHORT).show();
@@ -193,7 +189,5 @@ public class ProfileFragment extends Fragment {
                     have_MobileData=true;
         }
         return have_MobileData||have_WIFI;
-
     }
-
 }

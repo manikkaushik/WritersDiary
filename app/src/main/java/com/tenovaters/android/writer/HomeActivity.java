@@ -1,5 +1,7 @@
 package com.tenovaters.android.writer;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Callback;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;

@@ -25,38 +25,49 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:id="@+id/tv_readerscatogory"
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/recycler_reader"
             android:layout_below="@+id/tv_readersTitle"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="test" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/tv_readersdescription"
-            android:layout_below="@+id/tv_readerscatogory"
+            android:layout_below="@+id/recycler_reader"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="test" />
+            android:layout_margin="@dimen/text_margin" />
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/tv_readersauthorname"
             android:layout_below="@+id/tv_readersdescription"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="test" />
+            android:layout_margin="@dimen/text_margin" />
+
+        <Button
+            android:id="@+id/btn_like"
+            android:gravity="center"
+            android:layout_below="@+id/tv_readersauthorname"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Like" />
 
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/tv_readerStory"
-            android:layout_below="@+id/tv_readersauthorname"
+            android:layout_below="@+id/btn_like"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="test" />
+            android:text="@string/large_text"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/tv_readerStory"
+            android:layout_height="match_parent" />
 
 
     </RelativeLayout>

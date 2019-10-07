@@ -36,6 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.tenovaters.android.writer.Database.CategoryList;
 import com.tenovaters.android.writer.ui.Profile.ProfileFragment;
 import com.tenovaters.android.writer.ui.home.HomeFragment;
 
@@ -98,6 +99,9 @@ public class HomeActivity extends AppCompatActivity
         img=(ImageView)hView.findViewById(R.id.img_drawerimage);
         t1=(TextView)hView.findViewById(R.id.tv_drawerusername);
         t2=(TextView)hView.findViewById(R.id.tv_draweremail);
+
+       // startActivity(new Intent(HomeActivity.this,guest.class));
+
 
         if (user == null) {
             progressDialog.dismiss();

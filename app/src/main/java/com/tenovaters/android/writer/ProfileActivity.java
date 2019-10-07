@@ -24,10 +24,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,8 +59,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button sub,choose;
-    private EditText nam,ag;
+    private Button sub;
+    private FloatingActionButton choose;
+    private EditText nam,ag,email;
     private ImageView img;
     private DatabaseReference rootRef,demoRef,root1,demo1;
     private DatabaseReference mDataBase;
@@ -69,6 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Uri filepath;
     private ProgressBar mprogressbar;
     private ProgressBar pro;
+    private RadioGroup radioGroup;
 
     private String Name;
     private String age;
@@ -85,10 +89,13 @@ public class ProfileActivity extends AppCompatActivity {
         sub=(Button)findViewById(R.id.btn_prosub);
         nam=(EditText)findViewById(R.id.et_namee);
         ag=(EditText)findViewById(R.id.et_age);
-        choose=(Button)findViewById(R.id.choose);
+        email=(EditText)findViewById(R.id.et_profileemail);
+        choose=(FloatingActionButton) findViewById(R.id.choose);
         img=(ImageView)findViewById(R.id.circle_profile);
         mprogressbar=(ProgressBar)findViewById(R.id.progress);
         pro=(ProgressBar)findViewById(R.id.propho);
+        radioGroup = findViewById(R.id.radiogroup);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser().getUid();
@@ -99,7 +106,8 @@ public class ProfileActivity extends AppCompatActivity {
         mDataBase=FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
         demo1 = root1.child("Users").child(currentUser);
 
-
+        email.setText(firebaseAuth.getCurrentUser().getEmail());
+        email.setEnabled(false);
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,13 +123,21 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                  Name = nam.getText().toString();
                  age=ag.getText().toString();
+                 int y=0;
 
                 if(haveNetwork()) {
+                    int selectedId = radioGroup.getCheckedRadioButtonId();
+                    switch (selectedId) {
+                        case R.id.male:
+                            y = 1;
+                            break;
+                        case R.id.female:
+                            y = 1;
+                            break;
 
-                   // if(filepath == null){
-                     //   Toast.makeText(ProfileActivity.this, "Please Upload Your Profile Picture", Toast.LENGTH_SHORT).show();
-                   // }
-                     if (!TextUtils.isEmpty(Name) && !TextUtils.isEmpty(age)) {
+                    }
+
+                     if (!TextUtils.isEmpty(Name) && !TextUtils.isEmpty(age) && y==1) {
 
                         if (mUploadTask != null && mUploadTask.isInProgress()) {
                             Toast.makeText(ProfileActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();

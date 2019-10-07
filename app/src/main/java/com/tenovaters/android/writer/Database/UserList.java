@@ -13,8 +13,6 @@ public class UserList {
             this.name = Name;
             this.userID=UserID;
             this.age=Age;
-
-
         }
 
         public UserList(String Name,String UserID,String Age,String Image) {

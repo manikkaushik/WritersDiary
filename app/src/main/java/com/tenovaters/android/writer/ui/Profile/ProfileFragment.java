@@ -73,10 +73,10 @@ public class ProfileFragment extends Fragment {
         progressDialog.setCanceledOnTouchOutside(false);
 
 
-        demoRef.child("name").addValueEventListener(new ValueEventListener() {
+        demoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
+                String value = dataSnapshot.child("name").getValue(String.class);
                 //Log.d(TAG,"Value is"+ value);
                 //Toast.makeText(Details.this,"value is"+value,Toast.LENGTH_SHORT).show();
                 if(haveNetwork()) {

@@ -1,96 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/android_background"
-    tools:context=".RegisterActivity">
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent"
+    android:background="@drawable/android_background" xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-            <TextView
-                android:id="@+id/title_reg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/my_beautiful_font"
-                android:text="@string/title"
-                android:textColor="#FFFFFF"
-                android:textSize="86sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/loading"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <EditText
-                android:id="@+id/username_reg"
-                android:layout_below="@+id/title_reg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
-                android:selectAllOnFocus="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
-
-            <EditText
-                android:id="@+id/password_reg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/username_reg"
-                android:layout_marginTop="10dp"
-                android:hint="@string/prompt_password"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
-                app:layout_constraintTop_toBottomOf="@+id/username"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteX="146dp" />
+    <ScrollView android:layout_height="match_parent" android:layout_width="match_parent">
 
 
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="30dp">
 
-            <Button
-                android:id="@+id/regiter_reg"
-                android:layout_below="@+id/password_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:background="@drawable/round_fill"
-                android:textColor="@color/black"
-                android:text="Register" />
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        app:layout_constraintVertical_bias="1" app:layout_constraintTop_toTopOf="@+id/usename_reg2"
+        app:layout_constraintBottom_toBottomOf="@+id/loading" android:fontFamily="@font/my_beautiful_font"
+        android:text="@string/title" android:layout_marginLeft="20dp" android:id="@+id/title_reg"
+        android:textColor="#ffffff" android:textStyle="bold" android:textSize="86sp"/>
 
 
-            <ProgressBar
-                android:id="@+id/loading_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/regiter_reg"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
-                android:visibility="gone" />
-        </RelativeLayout>
-    </ScrollView>
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:background="@drawable/edit_text_layout"
+        android:layout_marginTop="30dp" android:id="@+id/usename_reg2" style="@style/TextInputLayout"
+        android:layout_below="@+id/title_reg">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:fontFamily="@font/ibm_plex_sans_regular"
+        android:id="@+id/username_reg" android:textColor="@color/black" android:textSize="18sp"
+        style="@style/UpdateProfileEditText" android:inputType="none|text|textCapSentences|textEmailAddress"
+        android:singleLine="true" android:hint="@string/prompt_email"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:background="@drawable/edit_text_layout"
+        android:layout_marginTop="20dp" android:id="@+id/password_reg2" style="@style/TextInputLayout"
+        android:layout_below="@+id/usename_reg2">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:fontFamily="@font/ibm_plex_sans_regular"
+        android:id="@+id/password_reg" android:textColor="@color/black" android:textSize="18sp"
+        style="@style/UpdateProfileEditText" android:inputType="none|text|textCapSentences|textPassword"
+        android:singleLine="true" android:hint="Password"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_marginTop="10dp" android:fontFamily="@font/ibmplexsans_bolditalic"
+        android:text="Show Password" android:id="@+id/show_register" android:textSize="16sp"
+        android:layout_below="@+id/password_reg2" android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp" android:layout_gravity="center"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:background="@drawable/round_fill" android:layout_marginTop="30dp" android:text="Register"
+        android:id="@+id/regiter_reg" android:textColor="@color/black" android:layout_below="@+id/show_register"
+        android:layout_gravity="center" android:layout_centerHorizontal="true" android:layout_marginBottom="30dp"
+        android:paddingRight="30dp" android:paddingLeft="30dp"/>
+
+    <ProgressBar android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_marginTop="20dp" android:id="@+id/loading_reg" android:layout_below="@+id/regiter_reg"
+        android:layout_gravity="center" android:layout_centerHorizontal="true" android:layout_marginBottom="30dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>
+
+</ScrollView>
 
 </RelativeLayout>

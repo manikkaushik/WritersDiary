@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent" xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <com.google.android.material.appbar.AppBarLayout android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent" android:background="@drawable/android_background"
+        android:id="@+id/app_bar_layout" android:theme="@style/AppTheme.AppBarOverlay">
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+    <androidx.appcompat.widget.Toolbar android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent" android:id="@+id/feed_toolbar"
+        app:popupTheme="@style/AppTheme.PopupOverlay" android:layout_weight="0.9"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:background="@drawable/round_fill" android:id="@+id/btn_previewpdf"
+        android:layout_weight="0.1" android:text="Preview" android:layout_marginRight="10dp"
+        android:paddingRight="5dp" android:layout_gravity="center"/>
+
+</LinearLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
+
+
+    <ScrollView android:layout_height="match_parent" android:layout_width="match_parent"
+        android:layout_below="@+id/app_bar_layout">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginBottom="20dp">
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:id="@+id/card_image" android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" android:layout_marginLeft="10dp">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginBottom="10dp">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tv_1"
+        android:text="**UNTITLED**" android:layout_below="@+id/circle_profile_publish" android:layout_marginTop="20dp"
+        android:fontFamily="@font/ibm_plex_sans_bold" android:gravity="center" android:textColor="@color/black"
+        android:textSize="25dp"/>
+
+    <p013de.hdodenhof.circleimageview.CircleImageView android:layout_height="200dp" android:layout_width="200dp"
+        android:id="@+id/circle_profile_publish" android:layout_marginTop="20dp" android:layout_centerHorizontal="true"
+        android:src="@drawable/no_preview"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+    -<androidx.cardview.widget.CardView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/card_linearlayout" android:layout_marginRight="10dp" android:layout_below="@+id/card_image"
+        android:layout_marginTop="10dp" android:layout_marginLeft="10dp">
+
+
+    -<RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginBottom="10dp">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tv_2"
+        android:text="Description" android:layout_marginTop="20dp" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:gravity="center" android:textColor="@color/black" android:textSize="25dp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_description_publish" android:text="**No Description**" android:layout_marginRight="10dp"
+        android:layout_below="@+id/tv_2" android:layout_marginTop="10dp" android:layout_marginLeft="10dp"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:gravity="center" android:textColor="@color/black"
+        android:textSize="25dp"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+    -<androidx.cardview.widget.CardView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/card_last" android:layout_marginRight="10dp" android:layout_below="@+id/card_linearlayout"
+        android:layout_marginTop="10dp" android:layout_marginLeft="10dp">
+
+
+    -<RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginBottom="10dp">
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/linear_publish" android:orientation="horizontal" android:layout_marginTop="20dp">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.5"
+        android:text="Category" android:layout_gravity="center" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:gravity="center" android:textColor="@color/black" android:textSize="25dp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_genere_publish" android:layout_weight="0.5" android:text="**No Category**"
+        android:layout_gravity="center" android:fontFamily="@font/ibm_plex_sans_regular" android:gravity="center"
+        android:textColor="@color/black" android:textSize="25dp"/>
+
+</LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/recycler_publish" android:layout_marginRight="20dp" android:layout_below="@+id/linear_publish"
+        android:layout_marginTop="20dp" android:layout_marginLeft="20dp"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:background="@drawable/round_fill" android:id="@+id/btn_uploadpdf" android:text="Yes, Publish It"
+        android:paddingRight="10dp" android:layout_below="@+id/card_last" android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" android:paddingLeft="10dp"/>
+
+    <ProgressBar android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:id="@+id/pro_publish" android:layout_centerHorizontal="true" android:layout_centerVertical="true"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
+
+</ScrollView>
+
+</RelativeLayout>

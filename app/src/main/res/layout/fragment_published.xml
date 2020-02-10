@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <FrameLayout android:layout_height="match_parent" android:layout_width="match_parent"
+    xmlns:aapt="http://schemas.android.com/aapt" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:dist="http://schemas.android.com/apk/distribution" xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    -<RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView android:layout_height="match_parent"
+        android:layout_width="match_parent" android:layout_marginRight="10dp" android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp" android:id="@+id/recycler_publish"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_marginRight="20dp" android:layout_marginLeft="20dp" android:id="@+id/tv_no_publish"
+        android:fontFamily="@font/ibm_plex_sans_bold" android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="You Have Not Published Anything. Please Press On Fab(+) Button To Write and Publish Something."
+        android:visibility="invisible" android:gravity="center" android:textColor="@color/black" android:textSize="20sp"/>
+
+</RelativeLayout>
+
+</FrameLayout>

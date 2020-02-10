@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent" xmlns:aapt="http://schemas.android.com/aapt" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:dist="http://schemas.android.com/apk/distribution" xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <com.google.android.material.appbar.AppBarLayout android:layout_height="?attr/actionBarSize" android:layout_width="match_parent" android:background="@drawable/android_background" android:id="@+id/app_bar_layout" android:theme="@style/AppTheme.AppBarOverlay">
+
+
+    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="horizontal">
+
+    <androidx.appcompat.widget.Toolbar android:layout_height="?attr/actionBarSize" android:layout_width="match_parent" android:id="@+id/feed_toolbar" app:popupTheme="@style/AppTheme.PopupOverlay" android:layout_weight="0.8"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:background="@drawable/round_fill" android:id="@+id/btn_skip" android:layout_weight="0.2" android:fontFamily="@font/ibm_plex_sans_regular" android:layout_below="@+id/btn_next" android:text="Skip" android:gravity="center" android:textColor="@color/black"/>
+
+</LinearLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
+
+
+    <ScrollView android:layout_height="match_parent" android:layout_width="match_parent" android:layout_below="@+id/app_bar_layout">
+
+
+    <RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent">
+
+    <ImageView android:layout_height="150dp" android:layout_width="150dp" android:id="@+id/img_story" android:src="@drawable/plus_image" android:layout_marginTop="20dp" android:layout_marginLeft="20dp"/>
+
+    <ProgressBar
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/pro_editdraft" android:layout_marginTop="75dp"
+        android:layout_marginLeft="70dp" android:visibility="invisible"/>
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/ibm_plex_sans_regular"
+        android:text="Click On Image To Add Cover Photo" android:gravity="center"
+        android:textColor="@color/black" android:layout_marginTop="65dp" android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/img_story" android:layout_marginRight="20dp" android:textSize="20dp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:background="@drawable/edit_text_layout" android:id="@+id/et_title2" android:layout_below="@+id/img_story" android:layout_marginTop="20dp" style="@style/TextInputLayout">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/et_title" android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:textSize="18sp" style="@style/UpdateProfileEditText" android:inputType="textCapSentences" android:singleLine="true" android:hint="Title"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:background="@drawable/edit_text_layout" android:id="@+id/et_description2" android:layout_below="@+id/et_title2" android:layout_marginTop="20dp" style="@style/TextInputLayout">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/et_description" android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:textSize="18sp" style="@style/UpdateProfileEditText" android:inputType="none|text|textCapSentences|textMultiLine" android:singleLine="true" android:hint="Description"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linear_story" android:orientation="horizontal" android:layout_below="@+id/et_description2" android:layout_marginTop="10dp" android:layout_marginLeft="20dp" android:layout_marginRight="20dp">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:fontFamily="@font/ibm_plex_sans_bold" android:text="Category:" android:textColor="@color/black" android:textSize="25dp" android:layout_gravity="center"/>
+
+
+    -<RadioGroup android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/radiogroup_story" android:orientation="horizontal" android:gravity="center" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_gravity="center">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/story_story" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Story" android:textColor="@color/black" android:textSize="20dp" android:layout_gravity="center"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/poem_story" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Poem" android:textColor="@color/black" android:textSize="20dp"/>
+
+</RadioGroup>
+
+</LinearLayout>
+
+
+    -<androidx.cardview.widget.CardView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/card_edit" android:layout_below="@+id/linear_story" android:layout_marginTop="10dp" android:layout_marginLeft="20dp" android:layout_marginRight="20dp">
+
+
+    -<RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center" android:layout_gravity="center">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tv_interstedin" android:fontFamily="@font/ibm_plex_sans_bold" android:text="Choose Tags" android:gravity="center" android:textColor="@color/black" android:layout_marginTop="5dp" android:textSize="25sp" android:textAllCaps="true" android:layout_centerHorizontal="true"/>
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:layout_below="@+id/tv_interstedin" android:layout_marginTop="10dp">
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="horizontal" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_gravity="center">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/abstarct1" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Abstract" android:textColor="@color/black" android:textSize="20dp"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/action1" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Action" android:textColor="@color/black" android:textSize="20dp"/>
+
+</LinearLayout>
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="horizontal" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_gravity="center">
+
+    <RadioButton android:layout_height="wrap_content" android:layout_width="100dp" android:id="@+id/children" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Children Story" android:textColor="@color/black" android:textSize="20dp"/>
+
+    <RadioButton android:layout_height="wrap_content" android:layout_width="100dp" android:id="@+id/classic" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Classics" android:textColor="@color/black" android:textSize="20dp"/>
+
+</LinearLayout>
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="horizontal" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_gravity="center">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/comedy" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Comedy" android:textColor="@color/black" android:textSize="20dp"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/crime" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Crime" android:textColor="@color/black" android:textSize="20dp"/>
+
+</LinearLayout>
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="horizontal" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_gravity="center">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/drama" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Drama" android:textColor="@color/black" android:textSize="20dp"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/fantasy" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Fantasy" android:textColor="@color/black" android:textSize="20dp"/>
+
+</LinearLayout>
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="horizontal" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_gravity="center">
+
+    <RadioButton android:layout_height="wrap_content" android:layout_width="100dp" android:id="@+id/horror" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Horror" android:textColor="@color/black" android:textSize="20dp"/>
+
+    <RadioButton android:layout_height="wrap_content" android:layout_width="100dp" android:id="@+id/inspirational" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Inspirational" android:textColor="@color/black" android:textSize="20dp"/>
+
+</LinearLayout>
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="horizontal" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_gravity="center">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/romance" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Romance" android:textColor="@color/black" android:textSize="20dp"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/thriller" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Thriller" android:textColor="@color/black" android:textSize="20dp"/>
+
+</LinearLayout>
+
+
+    -<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="horizontal" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_gravity="center">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/tragedy" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Tragedy" android:textColor="@color/black" android:textSize="20dp"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/other" android:layout_weight="0.5" android:fontFamily="@font/ibm_plex_sans_regular" android:text="Others" android:textColor="@color/black" android:textSize="20dp"/>
+
+</LinearLayout>
+
+</LinearLayout>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:background="@drawable/round_fill" android:id="@+id/btn_next" android:fontFamily="@font/ibm_plex_sans_regular" android:layout_below="@+id/card_edit" android:text="Save And Next" android:gravity="center" android:textColor="@color/black" android:layout_marginTop="20dp" android:layout_centerHorizontal="true" android:layout_marginBottom="30dp" android:paddingRight="10dp" android:paddingLeft="10dp"/>
+
+</RelativeLayout>
+
+</ScrollView>
+
+</RelativeLayout>

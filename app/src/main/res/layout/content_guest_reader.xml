@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <androidx.core.widget.NestedScrollView
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginBottom="10dp">
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp" android:layout_marginLeft="10dp"
+        android:id="@+id/cv_readers">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:id="@+id/tv_readersTitle"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textAllCaps="true"
+        android:text="test" android:gravity="center" android:textColor="@color/black"
+        android:textStyle="bold" android:textSize="22sp"/>
+
+    <ImageView android:layout_height="60dp" android:layout_width="60dp" android:layout_marginTop="10dp"
+        android:id="@+id/img_authorimage" android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_readersTitle" android:src="@drawable/picture1"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_marginTop="5dp" android:id="@+id/tv_readersauthorname"
+        android:fontFamily="@font/ibm_plex_sans_light" android:text="Author Name" android:textColor="@color/black"
+        android:textSize="18sp" android:layout_centerHorizontal="true" android:layout_below="@+id/img_authorimage"
+        android:layout_margin="@dimen/text_margin"/>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="20dp" android:id="@+id/linear_id" android:gravity="center"
+        android:layout_below="@+id/tv_readersauthorname" android:orientation="horizontal">
+
+    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:src="@drawable/ic_viewrs_green" android:layout_gravity="center"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp" android:id="@+id/tv_viewsreader" android:fontFamily="@font/ibm_plex_sans_light"
+        android:text="views"/>
+
+    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="20dp"
+        android:src="@android:drawable/btn_star_big_on" android:layout_gravity="center"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="5dp"
+        android:id="@+id/tv_ratingreader" android:fontFamily="@font/ibm_plex_sans_light" android:text="0"/>
+
+    <ImageView android:layout_height="20dp" android:layout_width="wrap_content" android:layout_marginLeft="20dp"
+        android:src="@drawable/comment_icon" android:layout_gravity="center"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="5dp"
+        android:id="@+id/tv_commentreader" android:fontFamily="@font/ibm_plex_sans_light" android:text="comments"/>
+
+</LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginRight="10dp" android:layout_marginTop="20dp" android:layout_marginLeft="10dp" android:id="@+id/recycler_reader" android:layout_below="@+id/linear_id"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginTop="10dp"
+        android:id="@+id/btn_readStory" android:text="Read" android:gravity="center" android:layout_centerHorizontal="true"
+        android:layout_below="@+id/recycler_reader" android:paddingRight="10dp" android:paddingLeft="10dp"
+        android:background="@drawable/round_fill"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginRight="10dp" android:layout_marginTop="20dp" android:layout_marginLeft="10dp"
+        android:id="@+id/cv_destcardview" android:layout_below="@+id/cv_readers">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginTop="10dp"
+        android:id="@+id/tv_description" android:fontFamily="@font/ibm_plex_sans_regular" android:textAllCaps="true"
+        android:text="Description" android:gravity="center" android:textColor="@color/black" android:textStyle="bold"
+        android:textSize="18sp" android:layout_centerHorizontal="true"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" android:id="@+id/tv_readersdescription"
+        android:fontFamily="@font/ibm_plex_sans_light" android:text="Description" android:gravity="center"
+        android:layout_centerHorizontal="true" android:layout_below="@+id/tv_description"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <androidx.core.widget.NestedScrollView
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" android:layout_height="match_parent"
+    android:layout_width="match_parent" xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginRight="10dp" android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" android:id="@+id/cardviw_top">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_gravity="center">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_abouttheauthor" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:layout_centerHorizontal="true" android:text="About The Author" android:gravity="center"
+        android:textColor="@color/black" android:textSize="24sp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:id="@+id/tv_authordescrip"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:layout_centerHorizontal="true"
+        android:text="No Description Found" android:gravity="center" android:textColor="@color/black"
+        android:textSize="17sp" android:layout_below="@+id/tv_abouttheauthor" android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" android:layout_marginLeft="10dp"
+        android:id="@+id/cardviw_second" android:layout_below="@+id/cardviw_top">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_qwert" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:text="Author Interest" android:gravity="center" android:textColor="@color/black"
+        android:textSize="24sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginTop="10dp"
+        android:id="@+id/recycler_authorinterest" android:layout_below="@+id/tv_qwert"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_nointerest" android:text="No Interest Found" android:gravity="center"
+        android:textSize="20sp" android:layout_below="@+id/tv_qwert" android:layout_marginBottom="10dp"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" android:layout_marginLeft="10dp" android:id="@+id/cardviw_third"
+        android:layout_below="@+id/cardviw_second">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_qwert1" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:text="More Stories" android:gravity="center" android:textColor="@color/black"
+        android:textSize="24sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginTop="10dp" android:id="@+id/recycler_morestrories"
+        android:layout_below="@+id/tv_qwert1"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

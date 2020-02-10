@@ -1,52 +1,181 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_height="match_parent"
-    tools:context=".ui.Profile.ProfileFragment">
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <ImageView
-        android:id="@+id/img_profileimage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/profile" />
+    <ScrollView android:layout_height="match_parent" android:layout_width="match_parent"
+    xmlns:aapt="http://schemas.android.com/aapt" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:dist="http://schemas.android.com/apk/distribution" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ProgressBar
-        android:id="@+id/pro_image"
-        style="?android:attr/progressBarStyle"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="60dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/tv_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/img_profileimage"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="Hello"
-        android:textSize="24sp" />
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/tv_age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_username"
-        android:layout_toRightOf="@+id/img_profileimage"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="TextView"
-        android:textSize="24sp" />
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_margin="10dp" android:id="@+id/card_first">
+
+
+    <RelativeLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_gravity="center">
+
+    <p013de.hdodenhof.circleimageview.CircleImageView android:layout_height="150dp"
+        android:layout_width="150dp" android:id="@+id/img_profileimage" android:layout_centerHorizontal="true"
+        android:src="@drawable/profile" android:layout_marginRight="20dp" android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <ProgressBar android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:id="@+id/pro_image" android:layout_centerHorizontal="true" android:layout_marginTop="60dp"
+        android:layout_marginLeft="70dp" style="?android:attr/progressBarStyle"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_username" android:layout_marginTop="10dp" android:fontFamily="@font/ibm_plex_sans_regular"
+        android:layout_below="@+id/img_profileimage" android:text="UserName" android:gravity="center"
+        android:textColor="@color/black" android:textSize="24sp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_useremail" android:layout_marginTop="10dp" android:fontFamily="@font/ibm_plex_sans_regular"
+        android:layout_below="@+id/tv_username" android:text="TextView" android:gravity="center"
+        android:textColor="@color/black" android:textSize="24sp"/>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:layout_below="@+id/tv_useremail" android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:orientation="vertical" android:layout_weight="0.5">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:fontFamily="@font/ibm_plex_sans_bold" android:text="Story Published" android:gravity="center"
+        android:textColor="@color/black" android:textSize="20sp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_story_published" android:fontFamily="@font/ibm_plex_sans_regular" android:text="0"
+        android:gravity="center" android:textColor="@color/black" android:textSize="20sp"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:orientation="vertical" android:layout_weight="0.5">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:fontFamily="@font/ibm_plex_sans_bold" android:text="favourites" android:gravity="center"
+        android:textColor="@color/black" android:textSize="20sp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_favourites" android:fontFamily="@font/ibm_plex_sans_regular" android:text="0"
+        android:gravity="center" android:textColor="@color/black" android:textSize="20sp"/>
+
+</LinearLayout>
+
+</LinearLayout>
 
 </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_margin="10dp" android:id="@+id/card_second" android:layout_below="@+id/card_first">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/about"
+        android:layout_centerHorizontal="true" android:layout_marginTop="10dp" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:text="ABOUT" android:gravity="center" android:textColor="@color/black" android:textSize="24sp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tv_aboutauthor"
+        android:layout_centerHorizontal="true" android:layout_marginTop="5dp"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:layout_below="@+id/about" android:gravity="center"
+        android:textColor="@color/black" android:textSize="18sp" android:layout_marginBottom="10dp"
+        android:hint="No Description Found"/>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_margin="10dp" android:id="@+id/card_third" android:layout_marginTop="10dp"
+        android:layout_below="@+id/card_second">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/information" android:layout_centerHorizontal="true" android:layout_marginTop="10dp"
+        android:fontFamily="@font/ibm_plex_sans_bold" android:text="INFORMATION" android:gravity="center"
+        android:textColor="@color/black" android:textSize="24sp"/>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:layout_below="@+id/information" android:orientation="vertical">
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:text="Gender" android:gravity="center"
+        android:textColor="@color/black" android:textSize="18sp" android:layout_weight="0.5"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_gender_profile" android:fontFamily="@font/ibm_plex_sans_light"
+        android:text="----" android:gravity="center" android:textColor="@color/black" android:textSize="18sp"
+        android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:orientation="horizontal">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:text="Date Of Birth" android:gravity="center"
+        android:textColor="@color/black" android:textSize="18sp" android:layout_weight="0.5"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_dateofbirth" android:fontFamily="@font/ibm_plex_sans_light"
+        android:text="----" android:gravity="center" android:textColor="@color/black" android:textSize="18sp"
+        android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:orientation="horizontal">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:text="Age" android:gravity="center"
+        android:textColor="@color/black" android:textSize="18sp" android:layout_weight="0.5"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tv_age"
+        android:fontFamily="@font/ibm_plex_sans_light" android:text="----" android:gravity="center"
+        android:textColor="@color/black" android:textSize="18sp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:orientation="horizontal">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:text="Location" android:gravity="center"
+        android:textColor="@color/black" android:textSize="18sp" android:layout_weight="0.5"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/tv_location" android:fontFamily="@font/ibm_plex_sans_light" android:text="----"
+        android:gravity="center" android:textColor="@color/black" android:textSize="18sp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+</LinearLayout>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
+</ScrollView>

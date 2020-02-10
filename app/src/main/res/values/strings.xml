@@ -48,4 +48,10 @@ When he came back to town he organized a concert of music and dance. He spent a 
 
 The next day Birbal entered Akbar’s darbar and announced that he had done all that the king had asked his brother-in-law to do. The Emperor wanted to know how he had done it. Birbal repeated the sequences of all the events and then said, “The money I gave to the merchant for the wedding of his son – you have got back while on this earth. The money I spent on buying food and clothing for the poor – you will get it in the other world. The money I spent on the musical concert – you will get neither here nor there.” Akbar’s brother in law understood his mistake and resigned. Birbal got his place back.
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_author_detail">AuthorDetailActivity</string>
+    <string name="title_activity_guest_author_details">GuestAuthorDetailsActivity</string>
+    <string name="title_activity_guest_reader">GuestReaderActivity</string>
 </resources>

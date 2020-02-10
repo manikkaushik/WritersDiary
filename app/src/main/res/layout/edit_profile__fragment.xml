@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.EditProfile.EditProfile_Fragment"
+    android:layout_width="match_parent" xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent"
+        android:layout_marginBottom="20dp">
+
+
+    <RelativeLayout android:layout_height="210dp" android:layout_width="210dp"
+        android:layout_centerHorizontal="true" android:layout_marginTop="20dp"
+        android:id="@+id/relative_first" android:layout_gravity="center" android:gravity="center">
+
+    <p013de.hdodenhof.circleimageview.CircleImageView android:layout_height="200dp"
+        android:layout_width="200dp" android:layout_centerHorizontal="true"
+        android:id="@+id/circle_profile_edit" android:src="@drawable/ic_profile"/>
+
+    <ProgressBar android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true" android:id="@+id/propho_edit"
+        style="?android:attr/progressBarStyle" android:layout_centerVertical="true" android:layout_centerInParent="true"
+        android:visibility="invisible"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton android:layout_height="wrap_content"
+        android:layout_width="wrap_content" android:id="@+id/choose_edit" android:src="@drawable/ic_menu_gallery"
+        android:layout_alignParentBottom="true" android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
+
+
+    <RelativeLayout android:layout_height="match_parent" android:layout_width="match_parent"
+        android:layout_marginBottom="20dp" android:layout_below="@+id/relative_first">
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginTop="30dp" android:id="@+id/ti_name"
+        style="@style/TextInputLayout" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+        android:background="@drawable/edit_text_layout">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:id="@+id/et_name_edit" style="@style/UpdateProfileEditText"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:inputType="textCapSentences"
+        android:hint="Username" android:textColor="@color/black"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginTop="10dp" android:id="@+id/ti_description"
+        style="@style/TextInputLayout" android:layout_below="@+id/ti_name" android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" android:background="@drawable/edit_text_layout">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:id="@+id/et_description_edit"
+        style="@style/UpdateProfileEditText" android:fontFamily="@font/ibm_plex_sans_regular"
+        android:inputType="none|text|textCapSentences|textMultiLine" android:hint="Description"
+        android:textColor="@color/black"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginTop="10dp" android:id="@+id/ti_email"
+        style="@style/TextInputLayout" android:layout_below="@+id/ti_description" android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" android:background="@drawable/edit_text_layout">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:id="@+id/et_email_edit" style="@style/UpdateProfileEditText"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:hint="Email" android:textColor="@color/light_grey"
+        android:enabled="false"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:id="@+id/lineaar_edit" android:layout_below="@+id/ti_email"
+        android:layout_marginRight="20dp" android:layout_marginLeft="20dp" android:orientation="vertical">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_gravity="center" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:textColor="@color/black" android:text="Gender:" android:textSize="25dp"/>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="5dp" android:id="@+id/lineaar_edit2" android:layout_below="@+id/lineaar_edit2"
+        android:layout_marginRight="20dp" android:layout_marginLeft="20dp" android:orientation="horizontal">
+
+
+    <RadioGroup android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:id="@+id/radiogroup_edit" android:layout_gravity="center" android:gravity="center"
+        android:layout_marginRight="20dp" android:layout_marginLeft="20dp" android:orientation="horizontal">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/male_edit"
+        android:layout_gravity="center" android:fontFamily="@font/ibm_plex_sans_regular"
+        android:textColor="@color/black" android:text="Male" android:textSize="20dp" android:layout_weight="0.5"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/female_edit"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Female"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+</RadioGroup>
+
+</LinearLayout>
+
+</LinearLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginTop="10dp" android:id="@+id/it_age"
+        style="@style/TextInputLayout" android:layout_below="@+id/lineaar_edit" android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" android:background="@drawable/edit_text_layout">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:id="@+id/et_age_edit" style="@style/UpdateProfileEditText"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:inputType="number" android:hint="Age" android:textColor="@color/black"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginTop="10dp" android:id="@+id/ti_location"
+        style="@style/TextInputLayout" android:layout_below="@+id/it_age" android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" android:background="@drawable/edit_text_layout">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:id="@+id/et_location_edit" style="@style/UpdateProfileEditText"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:inputType="textCapSentences"
+        android:hint="Location" android:textColor="@color/black"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <androidx.cardview.widget.CardView android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginTop="10dp"
+        android:id="@+id/card_edit" android:layout_below="@+id/linear_edit"
+        android:layout_marginRight="20dp" android:layout_marginLeft="20dp">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:gravity="center">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_centerHorizontal="true" android:layout_marginTop="5dp"
+        android:id="@+id/tv_interstedin" android:gravity="center" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:textColor="@color/black" android:text="Interest In" android:textSize="25sp" android:textAllCaps="true"/>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:layout_below="@+id/tv_interstedin" android:orientation="vertical">
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/abstarct1"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Abstract"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/action1"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Action"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+    <RadioButton android:layout_height="wrap_content" android:layout_width="100dp" android:id="@+id/children"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Children Story"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+    <RadioButton android:layout_height="wrap_content" android:layout_width="100dp" android:id="@+id/classic"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Classics"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/comedy"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Comedy"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/crime"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Crime"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/drama"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Drama"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/fantasy"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Fantasy"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+    <RadioButton android:layout_height="wrap_content" android:layout_width="100dp" android:id="@+id/horror"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Horror"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+    <RadioButton android:layout_height="wrap_content" android:layout_width="100dp" android:id="@+id/inspirational"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Inspirational"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/romance"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Romance"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/thriller"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Thriller"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/tragedy"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Tragedy"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+    <RadioButton android:layout_height="50dp" android:layout_width="100dp" android:id="@+id/other"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="Others"
+        android:textSize="20dp" android:layout_weight="0.5"/>
+
+</LinearLayout>
+
+</LinearLayout>
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:layout_marginTop="10dp" android:id="@+id/linear_edit" android:layout_below="@+id/ti_location"
+        android:layout_marginRight="20dp" android:layout_marginLeft="20dp" android:orientation="horizontal">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_gravity="center" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:textColor="@color/black" android:text="Date Of Birth:" android:textSize="25sp"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:id="@+id/date_of_birth" android:layout_gravity="center" android:gravity="center"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:text="----"
+        android:textSize="20sp" android:layout_weight="0.9"/>
+
+    <ImageButton android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:id="@+id/btn_edit" android:src="@android:drawable/ic_menu_edit" android:background="@color/light_grey"
+        android:text="Enter" android:layout_weight="0.1"/>
+
+</LinearLayout>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:layout_marginBottom="20dp" android:layout_centerHorizontal="true" android:layout_marginTop="10dp"
+        android:id="@+id/submit_edit" android:gravity="center" android:layout_below="@+id/card_edit"
+        android:background="@drawable/round_fill" android:text="Submit" android:paddingRight="20dp"
+        android:paddingLeft="20dp"/>
+
+</RelativeLayout>
+
+</RelativeLayout>
+
+</ScrollView>

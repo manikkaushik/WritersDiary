@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent" xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.github.barteksc.pdfviewer.PDFView android:layout_height="match_parent"
+        android:layout_width="match_parent" android:id="@+id/pdf_viewrer"/>
+
+</RelativeLayout>

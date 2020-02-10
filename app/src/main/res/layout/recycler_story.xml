@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution" xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aapt="http://schemas.android.com/aapt" android:orientation="vertical" android:id="@+id/recycler_linearlayout"
+    android:layout_width="130dp" android:layout_height="wrap_content" android:layout_marginRight="10dp">
+    <ImageView android:id="@+id/img_recycler_story" android:layout_width="match_parent"
+        android:layout_height="150dp" android:src="@drawable/no_preview" android:scaleType="fitXY"/>
+    <TextView android:textSize="15sp" android:textColor="@color/black" android:gravity="center"
+        android:id="@+id/tv_recycler_story" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:fontFamily="@font/ibm_plex_sans_regular"/>
+</LinearLayout>

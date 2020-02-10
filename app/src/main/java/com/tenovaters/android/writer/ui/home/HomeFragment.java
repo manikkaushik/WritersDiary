@@ -30,47 +30,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-    private DatabaseReference mDataBase,mDatabaseRef;
-    private RecyclerView mRecyclerView;
-    private ReadersAdapter mAdapter;
-    private List<ReadersList> mUploads;
-    private ProgressBar mProgressCircle;
+    /* access modifiers changed from: private */
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public ReadersAdapter mAdapter;
+    private DatabaseReference mDataBase;
 
+    private DatabaseReference mDatabaseRef;
+    /* access modifiers changed from: private */
+
+    public ProgressBar mProgressCircle;
+    /* access modifiers changed from: private */
+    public RecyclerView mRecyclerView;
+    /* access modifiers changed from: private */
+    public List<ReadersList> mUploads;
+
+    /* renamed from: z */
+    int f630z;
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
-
-        mRecyclerView = (RecyclerView)root.findViewById(R.id.recycle_home);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // mProgressCircle = rootView.findViewById(R.id.pro);
-
-        mUploads = new ArrayList<>();
-        //mProgressCircle = (ProgressBar) findViewById(R.id.progressBar56);
-
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Reader");
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
+        this.mRecyclerView = (RecyclerView) root.findViewById(R.id.recycle_home);
+        this.mRecyclerView.setHasFixedSize(true);
+        this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        this.mUploads = new ArrayList();
+        String str = "Published";
+        this.f630z = 0;
+        this.mDatabaseRef = FirebaseDatabase.getInstance().getReference("Readers");
+        this.mDatabaseRef.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mUploads.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    ReadersList workersdatabase = postSnapshot.getValue(ReadersList.class);
-                    mUploads.add(workersdatabase);
-
+                if (HomeFragment.this.f630z == 0) {
+                    HomeFragment homeFragment = HomeFragment.this;
+                    homeFragment.f630z = 1;
+                    homeFragment.mUploads.clear();
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        for (DataSnapshot postSnapshot1 : postSnapshot.getChildren()) {
+                            ReadersList workersdatabase = (ReadersList) postSnapshot1.getValue(ReadersList.class);
+                            if ("Published".equals(workersdatabase.getStatus())) {
+                                HomeFragment.this.mUploads.add(workersdatabase);
+                            }
+                        }
+                    }
+                    HomeFragment homeFragment2 = HomeFragment.this;
+                    homeFragment2.mAdapter = new ReadersAdapter(homeFragment2.getContext(), HomeFragment.this.mUploads);
+                    HomeFragment.this.mRecyclerView.setAdapter(HomeFragment.this.mAdapter);
                 }
-                mAdapter = new ReadersAdapter(getContext(), mUploads);
-                mRecyclerView.setAdapter(mAdapter);
             }
-            @Override
+
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                mProgressCircle.setVisibility(View.INVISIBLE);
+                Toast.makeText(HomeFragment.this.getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                HomeFragment.this.mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
-
         return root;
     }
 }

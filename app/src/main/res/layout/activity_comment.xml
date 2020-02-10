@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:layout_height="match_parent" android:layout_width="match_parent" android:id="@+id/scrollView">
+
+        <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/recycler_comment" android:layout_marginBottom="70dp" android:layout_marginRight="10dp" android:layout_marginTop="20dp" android:layout_marginLeft="10dp"/>
+
+</RelativeLayout>
+
+</ScrollView>
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/tv_nocommentadapter"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" android:fontFamily="@font/ibm_plex_sans_bold"
+        android:layout_centerVertical="true" android:layout_centerHorizontal="true"
+        android:text="Be The First To Write A Review." android:visibility="invisible"
+        android:gravity="center" android:textColor="@color/black" android:textSize="20sp"/>
+
+    <include
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" android:layout_marginBottom="0dp"
+        android:layout_marginRight="10dp" android:layout_marginLeft="10dp"
+        layout="@layout/comment_layout" android:layout_alignParentBottom="true"
+        android:layout_below="@+id/recycler_comment"/>
+
+</RelativeLayout>

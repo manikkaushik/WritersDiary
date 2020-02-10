@@ -1,264 +1,305 @@
 package com.tenovaters.android.writer;
 
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Callback;
+import android.app.Activity;
+
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import android.view.View;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import android.view.Menu;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.AppBarConfiguration.Builder;
+
 import androidx.navigation.ui.NavigationUI;
+import com.facebook.share.internal.MessengerShareContentUtility;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import com.google.android.material.navigation.NavigationView;
+
+import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import com.google.firebase.iid.InstanceIdResult;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-import com.tenovaters.android.writer.Database.CategoryList;
+
+import com.tenovaters.android.writer.ui.EditProfile.EditProfile_Fragment;
+
 import com.tenovaters.android.writer.ui.Profile.ProfileFragment;
+
 import com.tenovaters.android.writer.ui.home.HomeFragment;
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FirebaseAuth firebaseAuth;
-    private DatabaseReference rootRef,demoRef;
-    private ImageView img;
-    private TextView t1,t2;
+public class HomeActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
+
+    /* access modifiers changed from: private */
+    public DatabaseReference demoRef;
+
+    /* access modifiers changed from: private */
+    public FirebaseAuth firebaseAuth;
+    Fragment fragment = new HomeFragment();
+    Fragment fragment2 = this.fragment;
+    /* access modifiers changed from: private */
+    public ImageView img;
+    ConstraintLayout layoutbottom;
+    ConstraintLayout layoutdrawer;
     ProgressDialog progressDialog;
-    ConstraintLayout layoutdrawer,layoutbottom;
-    Fragment fragment=new HomeFragment();
-    Fragment fragment2=fragment;
+    private DatabaseReference rootRef;
+    /* access modifiers changed from: private */
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    /* renamed from: t1 */
+    public TextView f572t1;
+    /* access modifiers changed from: private */
+
+    /* renamed from: t2 */
+    public TextView f573t2;
+
+    /* access modifiers changed from: protected */
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView((int) R.layout.activity_home);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
-        BottomNavigationView navView = findViewById(R.id.nav_view1);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard,R.id.navigation_notifications,R.id.navigation_profile)
-                .build();
+        BottomNavigationView navView = (BottomNavigationView) findViewById(R.id.nav_view1);
+        AppBarConfiguration appBarConfiguration = new Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_write, R.id.navigation_notifications, R.id.navigation_profile).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupActionBarWithNavController((AppCompatActivity) this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        rootRef = FirebaseDatabase.getInstance().getReference();
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        progressDialog = new ProgressDialog(HomeActivity.this);
-        progressDialog.setTitle("Your Account");
-        progressDialog.setMessage("Loading");
-        progressDialog.show();
-
-         layoutdrawer=(ConstraintLayout)findViewById(R.id.drawer_navigation);
-         layoutbottom=(ConstraintLayout)findViewById(R.id.bottom_navigation);
-
-
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setCancelable(false);
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        View hView =  navigationView.getHeaderView(0);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        this.firebaseAuth = FirebaseAuth.getInstance();
+        this.rootRef = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = this.firebaseAuth.getCurrentUser();
+        this.progressDialog = new ProgressDialog(this);
+        this.progressDialog.setTitle("Your Account");
+        this.progressDialog.setMessage("Loading");
+        this.progressDialog.show();
+        this.layoutdrawer = (ConstraintLayout) findViewById(R.id.drawer_navigation);
+        this.layoutbottom = (ConstraintLayout) findViewById(R.id.bottom_navigation);
+        this.progressDialog.setCanceledOnTouchOutside(false);
+        this.progressDialog.setCancelable(false);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView = navigationView.getHeaderView(0);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-        img=(ImageView)hView.findViewById(R.id.img_drawerimage);
-        t1=(TextView)hView.findViewById(R.id.tv_drawerusername);
-        t2=(TextView)hView.findViewById(R.id.tv_draweremail);
-
-       // startActivity(new Intent(HomeActivity.this,guest.class));
-
-
-        if (user == null) {
-            progressDialog.dismiss();
-            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-            finish();
-        }
-        else{
-            String currentUser = firebaseAuth.getCurrentUser().getUid();
-            demoRef = rootRef.child("Users").child(currentUser);
-
-            demoRef.child("name").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    final String value = dataSnapshot.getValue(String.class);
-
-                    if(value==null){
-                        progressDialog.dismiss();
-                        startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
-                        finish();
+        this.img = (ImageView) hView.findViewById(R.id.img_drawerimage);
+        this.f572t1 = (TextView) hView.findViewById(R.id.tv_drawerusername);
+        this.f573t2 = (TextView) hView.findViewById(R.id.tv_draweremail);
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(HomeActivity.this,
+                new OnSuccessListener<InstanceIdResult>() {
+                    @Override
+                    public void onSuccess(InstanceIdResult instanceIdResult) {
+                        String newToken = instanceIdResult.getToken();
+                        Log.e("newToken", newToken);
                     }
-                    else {
-                        progressDialog.dismiss();
-                        t1.setText(value);
-                        t2.setText(firebaseAuth.getCurrentUser().getEmail());
-                        demoRef.child("image").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                String imageurl = dataSnapshot.getValue(String.class);
-                                //Log.d(TAG,"Value is"+ value);
-
-
-                                if (imageurl != null) {
-                                    Picasso.with(HomeActivity.this).load(imageurl).fit().centerCrop().placeholder(R.mipmap.ic_launcher_round).into(img, new Callback() {
-                                        @Override
-                                        public void onSuccess() {
-
-                                        }
-
-                                        @Override
-                                        public void onError() {
-                                        }
-                                    });
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Toast.makeText(HomeActivity.this, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    progressDialog.dismiss();
-                    Toast.makeText(HomeActivity.this,"Check your Internet Connection",Toast.LENGTH_SHORT).show();
+                });
+        if (!haveNetwork().booleanValue()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage((CharSequence) "Check your Internet Connection!!");
+            builder.setCancelable(false);
+            builder.setPositiveButton((CharSequence) "Ok", (OnClickListener) new OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    HomeActivity.this.finish();
+                    System.exit(0);
                 }
             });
+            builder.create().show();
         }
+        if (user == null) {
+            this.progressDialog.dismiss();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+        this.demoRef = this.rootRef.child("Users").child(this.firebaseAuth.getCurrentUser().getUid());
+        this.demoRef.child("name").addValueEventListener(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = (String) dataSnapshot.getValue(String.class);
+                if (value == null) {
+                    HomeActivity.this.progressDialog.dismiss();
+                    HomeActivity homeActivity = HomeActivity.this;
+                    homeActivity.startActivity(new Intent(homeActivity, ProfileActivity.class));
+                    HomeActivity.this.finish();
+                    return;
+                }
+                HomeActivity.this.progressDialog.dismiss();
+                HomeActivity.this.f572t1.setText(value);
+                HomeActivity.this.f573t2.setText(HomeActivity.this.firebaseAuth.getCurrentUser().getEmail());
+                HomeActivity.this.demoRef.child(MessengerShareContentUtility.MEDIA_IMAGE).addValueEventListener(new ValueEventListener() {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String imageurl = (String) dataSnapshot.getValue(String.class);
+                        if (imageurl != null) {
+                            Picasso.with(HomeActivity.this).load(imageurl).fit().centerCrop().placeholder((int) R.mipmap.ic_launcher_round).into(HomeActivity.this.img, new Callback() {
+                                public void onSuccess() {
+                                }
 
+                                public void onError() {
+                                }
+                            });
+                        }
+                    }
+
+                    public void onCancelled(DatabaseError databaseError) {
+                        Toast.makeText(HomeActivity.this, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            public void onCancelled(DatabaseError databaseError) {
+                HomeActivity.this.progressDialog.dismiss();
+                Toast.makeText(HomeActivity.this, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-        else if(layoutbottom.getVisibility()==View.INVISIBLE){
-            layoutbottom.setVisibility(View.VISIBLE);
-            layoutdrawer.setVisibility(View.INVISIBLE);
-        }
-        else {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen((int) GravityCompat.START)) {
+            drawer.closeDrawer((int) GravityCompat.START);
+        } else if (this.layoutbottom.getVisibility() == View.INVISIBLE) {
+            this.layoutbottom.setVisibility(View.VISIBLE);
+            this.layoutdrawer.setVisibility(View.INVISIBLE);
+        } else {
             super.onBackPressed();
-            //Toast.makeText(HomeActivity.this, "Check your ", Toast.LENGTH_LONG).show();
-
         }
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Fragment fragment3 = null;
+        if (id == R.id.nav_edit_profile) {
+            fragment3 = new EditProfile_Fragment();
         }
         if (id == R.id.logout) {
-            firebaseAuth.signOut();
+            this.firebaseAuth.signOut();
             finish();
-            startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             return true;
         }
-
+        if (fragment3 != null) {
+            if (fragment3.equals(null)) {
+                this.layoutbottom.setVisibility(View.VISIBLE);
+                this.layoutdrawer.setVisibility(View.INVISIBLE);
+            } else if (this.layoutbottom.getVisibility() == View.VISIBLE) {
+                this.layoutbottom.setVisibility(View.INVISIBLE);
+                this.layoutdrawer.setVisibility(View.VISIBLE);
+            }
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_content, fragment3);
+            ft.commit();
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-       displaySelectedScreen(id);
+        displaySelectedScreen(item.getItemId());
         return true;
     }
 
     private void displaySelectedScreen(int itemId) {
-
-        //creating fragment object
-         fragment = null;
-         Fragment fragment1 = null;
-        //initializing the fragment object which is selected
-        switch (itemId) {
-
-            case R.id.nav_home:
-                fragment = new HomeFragment();
-                fragment1=fragment;
-                fragment2=fragment;
-                break;
-            case R.id.nav_profile:
-                fragment = new ProfileFragment();
-                break;
-
+        this.fragment = null;
+        Fragment fragment1 = null;
+        if (itemId == R.id.nav_home) {
+            this.fragment = new HomeFragment();
+            fragment1 = this.fragment;
+            this.fragment2 = this.fragment;
+        } else if (itemId == R.id.nav_profile) {
+            this.fragment = new ProfileFragment();
         }
+        Fragment fragment3 = this.fragment;
+        if (fragment3 != null) {
+            if (fragment3.equals(fragment1)) {
+                this.layoutbottom.setVisibility(View.VISIBLE);
+                this.layoutdrawer.setVisibility(View.INVISIBLE);
+            } else if (this.layoutbottom.getVisibility() == View.VISIBLE) {
+                this.layoutbottom.setVisibility(View.INVISIBLE);
+                this.layoutdrawer.setVisibility(View.VISIBLE);
 
-        //replacing the fragment
-        if (fragment != null) {
-            if(fragment.equals(fragment1)){
-                layoutbottom.setVisibility(View.VISIBLE);
-                layoutdrawer.setVisibility(View.INVISIBLE);
             }
-            else if(layoutbottom.getVisibility()==View.VISIBLE){
-                layoutbottom.setVisibility(View.INVISIBLE);
-                layoutdrawer.setVisibility(View.VISIBLE);
-            }
-
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.nav_content, fragment);
+            ft.replace(R.id.nav_content, this.fragment);
             ft.commit();
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        ((DrawerLayout) findViewById(R.id.drawer_layout)).closeDrawer((int) GravityCompat.START);
     }
 
+    private Boolean haveNetwork() {
+        NetworkInfo[] networkInfos;
+        boolean have_MobileData = false;
+        boolean z = false;
+        boolean have_WIFI = false;
+        for (NetworkInfo info : ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE)).getAllNetworkInfo()) {
+            if (info.getTypeName().equalsIgnoreCase("WIFI") && info.isConnected()) {
+                have_WIFI = true;
+            }
+            if (info.getTypeName().equalsIgnoreCase("MOBILE") && info.isConnected()) {
+                have_MobileData = true;
+            }
+        }
+        if (have_MobileData || have_WIFI) {
+            z = true;
+        }
+        return Boolean.valueOf(z);
+    }
+
+    public void onStart() {
+        super.onStart();
+        this.firebaseAuth = FirebaseAuth.getInstance();
+        if (this.firebaseAuth.getCurrentUser() == null) {
+            this.progressDialog.dismiss();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+    }
 }

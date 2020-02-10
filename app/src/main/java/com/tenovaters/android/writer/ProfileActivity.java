@@ -1,24 +1,22 @@
 package com.tenovaters.android.writer;
 
-import android.content.ContentResolver;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Environment;
-import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,9 +24,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
+import androidx.appcompat.app.AppCompatActivity;
+import com.facebook.share.internal.MessengerShareContentUtility;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -40,318 +41,321 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.storage.UploadTask.TaskSnapshot;
 import com.tenovaters.android.writer.Database.UserList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
-//google sign in
-import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import id.zelory.compressor.Compressor;
 
 public class ProfileActivity extends AppCompatActivity {
-
-    private Button sub;
-    private FloatingActionButton choose;
-    private EditText nam,ag,email;
-    private ImageView img;
-    private DatabaseReference rootRef,demoRef,root1,demo1;
-    private DatabaseReference mDataBase;
-    private FirebaseAuth firebaseAuth;
-    private StorageTask mUploadTask;
-    private StorageReference mStorageRef;
-    private static final int GALAARY_INTENT=1;
-    private Uri filepath;
-    private ProgressBar mprogressbar;
-    private ProgressBar pro;
-    private RadioGroup radioGroup;
-
-    private String Name;
-    private String age;
-     private String currentUser;
-    private File actualImage;
-    private File compressedImage;
-
+    private static final int GALAARY_INTENT = 1;
+    /* access modifiers changed from: private */
+    public String Gender;
+    /* access modifiers changed from: private */
+    public String Name;
     private final String TAG = "abc";
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    private File actualImage;
+    /* access modifiers changed from: private */
+
+    /* renamed from: ag */
+    public EditText f577ag;
+    /* access modifiers changed from: private */
+    public String age;
+    private FloatingActionButton choose;
+    /* access modifiers changed from: private */
+    public File compressedImage;
+    /* access modifiers changed from: private */
+    public String currentUser;
+    /* access modifiers changed from: private */
+    public DatabaseReference demo1;
+    private DatabaseReference demoRef;
+    private EditText email;
+    private Uri filepath;
+    private FirebaseAuth firebaseAuth;
+    private ImageView img;
+    /* access modifiers changed from: private */
+    public DatabaseReference mDataBase;
+    private StorageReference mStorageRef;
+    /* access modifiers changed from: private */
+    public StorageTask mUploadTask;
+    /* access modifiers changed from: private */
+    public ProgressBar mprogressbar;
+    /* access modifiers changed from: private */
+    public EditText nam;
+    /* access modifiers changed from: private */
+    public ProgressBar pro;
+    /* access modifiers changed from: private */
+    public ProgressDialog progressDialog;
+    /* access modifiers changed from: private */
+    public RadioGroup radioGroup;
+    private DatabaseReference root1;
+    private DatabaseReference rootRef;
+    private Button sub;
+
+    /* access modifiers changed from: protected */
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
-        sub=(Button)findViewById(R.id.btn_prosub);
-        nam=(EditText)findViewById(R.id.et_namee);
-        ag=(EditText)findViewById(R.id.et_age);
-        email=(EditText)findViewById(R.id.et_profileemail);
-        choose=(FloatingActionButton) findViewById(R.id.choose);
-        img=(ImageView)findViewById(R.id.circle_profile);
-        mprogressbar=(ProgressBar)findViewById(R.id.progress);
-        pro=(ProgressBar)findViewById(R.id.propho);
-        radioGroup = findViewById(R.id.radiogroup);
-
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        currentUser = firebaseAuth.getCurrentUser().getUid();
-        mStorageRef = FirebaseStorage.getInstance().getReference(currentUser);
-        rootRef = FirebaseDatabase.getInstance().getReference();
-        root1 = FirebaseDatabase.getInstance().getReference();
-        demoRef = rootRef.child("Users").child(currentUser);
-        mDataBase=FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
-        demo1 = root1.child("Users").child(currentUser);
-
-        email.setText(firebaseAuth.getCurrentUser().getEmail());
-        email.setEnabled(false);
-        choose.setOnClickListener(new View.OnClickListener() {
-            @Override
+        setContentView((int) R.layout.activity_profile);
+        this.sub = (Button) findViewById(R.id.btn_prosub);
+        this.nam = (EditText) findViewById(R.id.et_namee);
+        this.f577ag = (EditText) findViewById(R.id.et_age);
+        this.email = (EditText) findViewById(R.id.et_profileemail);
+        this.choose = (FloatingActionButton) findViewById(R.id.choose);
+        this.img = (ImageView) findViewById(R.id.circle_profile);
+        this.mprogressbar = (ProgressBar) findViewById(R.id.progress);
+        this.pro = (ProgressBar) findViewById(R.id.propho);
+        this.radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
+        this.firebaseAuth = FirebaseAuth.getInstance();
+        this.currentUser = this.firebaseAuth.getCurrentUser().getUid();
+        String str = "Users";
+        this.mStorageRef = FirebaseStorage.getInstance().getReference(str).child(this.currentUser);
+        this.rootRef = FirebaseDatabase.getInstance().getReference();
+        this.root1 = FirebaseDatabase.getInstance().getReference();
+        this.demoRef = this.rootRef.child(str).child(this.currentUser);
+        this.mDataBase = FirebaseDatabase.getInstance().getReference(str).child(this.currentUser);
+        this.demo1 = this.root1.child(str).child(this.currentUser);
+        this.progressDialog = new ProgressDialog(this);
+        this.progressDialog.setTitle("Uploading your details...");
+        this.progressDialog.setMessage("Please wait...");
+        this.progressDialog.setCanceledOnTouchOutside(false);
+        this.email.setText(this.firebaseAuth.getCurrentUser().getEmail());
+        this.email.setEnabled(false);
+        this.choose.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                Intent intent = new Intent("android.intent.action.GET_CONTENT");
                 intent.setType("image/*");
-                startActivityForResult(intent, GALAARY_INTENT);
-
+                ProfileActivity.this.startActivityForResult(intent, 1);
             }
         });
-
-        sub.setOnClickListener(new View.OnClickListener() {
-            @Override
+        this.sub.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                 Name = nam.getText().toString();
-                 age=ag.getText().toString();
-                 int y=0;
-
-                if(haveNetwork()) {
-                    int selectedId = radioGroup.getCheckedRadioButtonId();
-                    switch (selectedId) {
-                        case R.id.male:
-                            y = 1;
-                            break;
-                        case R.id.female:
-                            y = 1;
-                            break;
-
+                ProfileActivity profileActivity = ProfileActivity.this;
+                profileActivity.Name = profileActivity.nam.getText().toString();
+                ProfileActivity profileActivity2 = ProfileActivity.this;
+                profileActivity2.age = profileActivity2.f577ag.getText().toString();
+                int y = 0;
+                if (ProfileActivity.this.haveNetwork().booleanValue()) {
+                    int selectedId = ProfileActivity.this.radioGroup.getCheckedRadioButtonId();
+                    if (selectedId == R.id.female) {
+                        y = 1;
+                        ProfileActivity.this.Gender = "Female";
+                    } else if (selectedId == R.id.male) {
+                        y = 1;
+                        ProfileActivity.this.Gender = "Male";
                     }
-
-                     if (!TextUtils.isEmpty(Name) && !TextUtils.isEmpty(age) && y==1) {
-
-                        if (mUploadTask != null && mUploadTask.isInProgress()) {
-                            Toast.makeText(ProfileActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
-                        } else {
-                            demo1.child("image").setValue("null");
-                            compressImage();
-                           // uploadFile();
-                        }
-                    }
-                    else{
+                    if (TextUtils.isEmpty(ProfileActivity.this.Name) || TextUtils.isEmpty(ProfileActivity.this.age) || y != 1) {
                         Toast.makeText(ProfileActivity.this, "Enter the details", Toast.LENGTH_SHORT).show();
+                    } else if (ProfileActivity.this.mUploadTask == null || !ProfileActivity.this.mUploadTask.isInProgress()) {
+                        ProfileActivity.this.demo1.child(MessengerShareContentUtility.MEDIA_IMAGE).setValue("null");
+                        ProfileActivity.this.compressImage();
+                    } else {
+                        Toast.makeText(ProfileActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
+                } else {
                     Toast.makeText(ProfileActivity.this, "NO INTERNET", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
     public void compressImage() {
-        if (actualImage == null) {
-            Toast.makeText(ProfileActivity.this, "Please choose an image!", Toast.LENGTH_SHORT).show();
-        } else {
-
-            new id.zelory.compressor.Compressor(this)
-                    .compressToFileAsFlowable(actualImage)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<File>() {
-                        @Override
-                        public void accept(File file) {
-                            compressedImage = file;
-                            setCompressedImage();
-                        }
-                    }, new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) {
-                            throwable.printStackTrace();
-                            Toast.makeText(ProfileActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        if (this.actualImage == null) {
+            this.progressDialog.show();
+            UserList userList = new UserList(this.Name, this.currentUser, this.age, "null", this.Gender);
+            this.mDataBase.setValue(userList).addOnCompleteListener(new OnCompleteListener<Void>() {
+                public void onComplete(Task<Void> task) {
+                    Toast.makeText(ProfileActivity.this, "Details uploaded", Toast.LENGTH_SHORT).show();
+                    ProfileActivity.this.progressDialog.dismiss();
+                    ProfileActivity profileActivity = ProfileActivity.this;
+                    profileActivity.startActivity(new Intent(profileActivity, HomeActivity.class));
+                    ProfileActivity.this.finish();
+                }
+            });
+            return;
         }
+        new Compressor(this).compressToFileAsFlowable(this.actualImage).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<File>() {
+            public void accept(File file) {
+                ProfileActivity.this.compressedImage = file;
+                ProfileActivity.this.setCompressedImage();
+            }
+        }, new Consumer<Throwable>() {
+            public void accept(Throwable throwable) {
+                throwable.printStackTrace();
+                Toast.makeText(ProfileActivity.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    private void print(String str){
-        Log.d(TAG, str);
+    private void print(String str) {
+        Log.d("abc", str);
     }
 
-    public void SaveFile(){
-        BitmapDrawable drawable = (BitmapDrawable) img.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
-
+    public void SaveFile() {
+        String str = "onPictureTaken - wrote to ";
+        Bitmap bitmap = ((BitmapDrawable) this.img.getDrawable()).getBitmap();
         print("Creating cw");
-        ContextWrapper cw = new ContextWrapper(this.getApplicationContext());
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
         print("Creating dir");
-        File directory = cw.getDir("ImagesDir", Context.MODE_PRIVATE);
-        print("Created dir" + directory);
-        File mypath=new File(directory,"myImagesDGS.jpg");
-        print("path is"+mypath);
-
-        FileOutputStream outStream = null;
-
-        // Write to SD Card
+        File directory = cw.getDir("ImagesDir", 0);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Created dir");
+        sb.append(directory);
+        print(sb.toString());
+        File mypath = new File(directory, "myImagesDGS.jpg");
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append("path is");
+        sb2.append(mypath);
+        print(sb2.toString());
         try {
-            //File sdCard = Environment.get();
-            File dir = new File(mypath + "/Android/data/com.tenovaters.android.writer/Images");
+            StringBuilder sb3 = new StringBuilder();
+            sb3.append(mypath);
+            sb3.append("/Android/data/com.tenovaters.android.writer/Images");
+            File dir = new File(sb3.toString());
             dir.mkdirs();
-
-            String fileName = String.format("%d.jpg", System.currentTimeMillis());
-            File outFile = new File(dir, fileName);
-
-            outStream = new FileOutputStream(outFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+            File outFile = new File(dir, String.format("%d.jpg", new Object[]{Long.valueOf(System.currentTimeMillis())}));
+            FileOutputStream outStream = new FileOutputStream(outFile);
+            bitmap.compress(CompressFormat.JPEG, 100, outStream);
             outStream.flush();
             outStream.close();
-
-            Toast.makeText(getApplicationContext(), "onPictureTaken - wrote to " + outFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-            filepath=Uri.fromFile(outFile);
+            Context applicationContext = getApplicationContext();
+            StringBuilder sb4 = new StringBuilder();
+            sb4.append(str);
+            sb4.append(outFile.getAbsolutePath());
+            Toast.makeText(applicationContext, sb4.toString(), Toast.LENGTH_SHORT).show();
+            this.filepath = Uri.fromFile(outFile);
             uploadFile();
-
-            Log.d(TAG, "onPictureTaken - wrote to " + outFile.getAbsolutePath());
-
-            //refreshGallery(outFile);
+            StringBuilder sb5 = new StringBuilder();
+            sb5.append(str);
+            sb5.append(outFile.getAbsolutePath());
+            Log.d("abc", sb5.toString());
         } catch (FileNotFoundException e) {
             print("FNF");
-            Toast.makeText(getApplicationContext(), "File Not Found" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "File Not Found", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-        } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), "Exception Occured" , Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        } finally {
+        } catch (IOException e2) {
+            Toast.makeText(getApplicationContext(), "Exception Occured", Toast.LENGTH_SHORT).show();
+            e2.printStackTrace();
         }
     }
 
-    private void setCompressedImage() {
-        img.setImageBitmap(BitmapFactory.decodeFile(compressedImage.getAbsolutePath()));
+    /* access modifiers changed from: private */
+    public void setCompressedImage() {
+        this.img.setImageBitmap(BitmapFactory.decodeFile(this.compressedImage.getAbsolutePath()));
         SaveFile();
-
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /* access modifiers changed from: protected */
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALAARY_INTENT && resultCode == RESULT_OK) {
-            filepath=data.getData();
+        if (requestCode == 1 && resultCode == -1) {
+            this.filepath = data.getData();
             if (data == null) {
-                Toast.makeText(ProfileActivity.this, "Failed to open picture!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Failed to open picture!", Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
-                actualImage = FileUtil.from(this, data.getData());
-                img.setImageBitmap(BitmapFactory.decodeFile(actualImage.getAbsolutePath()));
+                this.actualImage = FileUtil.from(this, data.getData());
+                this.img.setImageBitmap(BitmapFactory.decodeFile(this.actualImage.getAbsolutePath()));
             } catch (IOException e) {
-                Toast.makeText(ProfileActivity.this, "Failed to read picture data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Failed to read picture data!", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
     }
+
     private String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
+        return MimeTypeMap.getSingleton().getExtensionFromMimeType(getContentResolver().getType(uri));
     }
 
-    private void uploadFile(){
-        if (filepath != null) {
-            choose.setEnabled(false);
-            pro.setVisibility(View.VISIBLE);
-            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(filepath));
-
-            mUploadTask = fileReference.putFile(filepath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mprogressbar.setProgress(0);
-                                }
-                            }, 500);
-
-                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    Toast.makeText(ProfileActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                                    UserList user= new UserList(Name,currentUser,age,uri.toString());
-                                    mDataBase.setValue(user);
-                                    pro.setVisibility(View.GONE);
-                                    pic();
-
-                                }
-                            });
+    private void uploadFile() {
+        if (this.filepath != null) {
+            this.choose.setEnabled(false);
+            this.pro.setVisibility(View.VISIBLE);
+            this.progressDialog.show();
+            StorageReference storageReference = this.mStorageRef;
+            StringBuilder sb = new StringBuilder();
+            sb.append(System.currentTimeMillis());
+            sb.append(".");
+            sb.append(getFileExtension(this.filepath));
+            final StorageReference fileReference = storageReference.child(sb.toString());
+            this.mUploadTask = fileReference.putFile(this.filepath).addOnSuccessListener((OnSuccessListener) new OnSuccessListener<TaskSnapshot>() {
+                public void onSuccess(TaskSnapshot taskSnapshot) {
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            ProfileActivity.this.mprogressbar.setProgress(0);
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfileActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                            pro.setVisibility(View.GONE);
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mprogressbar.setProgress((int) progress);
+                    }, 500);
+                    fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        public void onSuccess(Uri uri) {
+                            Toast.makeText(ProfileActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                            UserList userList = new UserList(ProfileActivity.this.Name, ProfileActivity.this.currentUser, ProfileActivity.this.age, uri.toString(), ProfileActivity.this.Gender);
+                            ProfileActivity.this.mDataBase.setValue(userList);
+                            ProfileActivity.this.pro.setVisibility(View.GONE);
+                            ProfileActivity.this.progressDialog.dismiss();
+                            ProfileActivity.this.pic();
                         }
                     });
-        } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener((OnFailureListener) new OnFailureListener() {
+                public void onFailure(Exception e) {
+                    Toast.makeText(ProfileActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    ProfileActivity.this.pro.setVisibility(View.GONE);
+                }
+            }).addOnProgressListener((OnProgressListener) new OnProgressListener<TaskSnapshot>() {
+                public void onProgress(TaskSnapshot taskSnapshot) {
+                    double bytesTransferred = (double) taskSnapshot.getBytesTransferred();
+                    Double.isNaN(bytesTransferred);
+                    double d = bytesTransferred * 100.0d;
+                    double totalByteCount = (double) taskSnapshot.getTotalByteCount();
+                    Double.isNaN(totalByteCount);
+                    ProfileActivity.this.mprogressbar.setProgress((int) (d / totalByteCount));
+                }
+            });
+            return;
         }
-
+        Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
     }
 
-    private Boolean haveNetwork(){
-        boolean have_WIFI=false;
-        boolean have_MobileData=false;
-
-        ConnectivityManager connectivityManager=(ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo[] networkInfos=connectivityManager.getAllNetworkInfo();
-
-        for (NetworkInfo info:networkInfos){
-            if(info.getTypeName().equalsIgnoreCase("WIFI"))
-                if(info.isConnected())
-                    have_WIFI=true;
-            if (info.getTypeName().equalsIgnoreCase("MOBILE"))
-                if(info.isConnected())
-                    have_MobileData=true;
+    /* access modifiers changed from: private */
+    public Boolean haveNetwork() {
+        NetworkInfo[] networkInfos;
+        boolean have_MobileData = false;
+        boolean z = false;
+        boolean have_WIFI = false;
+        for (NetworkInfo info : ((ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE)).getAllNetworkInfo()) {
+            if (info.getTypeName().equalsIgnoreCase("WIFI") && info.isConnected()) {
+                have_WIFI = true;
+            }
+            if (info.getTypeName().equalsIgnoreCase("MOBILE") && info.isConnected()) {
+                have_MobileData = true;
+            }
         }
-        return have_MobileData||have_WIFI;
-
+        if (have_MobileData || have_WIFI) {
+            z = true;
+        }
+        return Boolean.valueOf(z);
     }
-    public void pic(){
-        demoRef.child("image").addValueEventListener(new ValueEventListener() {
-            @Override
+
+    public void pic() {
+        this.demoRef.child(MessengerShareContentUtility.MEDIA_IMAGE).addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String imageurl = dataSnapshot.getValue(String.class);
-                if(imageurl!=null){
-                    Toast.makeText(ProfileActivity.this,"pic is uploaded",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
-                    finish();
+                if (((String) dataSnapshot.getValue(String.class)) != null) {
+                    Toast.makeText(ProfileActivity.this, "pic is uploaded", Toast.LENGTH_SHORT).show();
+                    ProfileActivity profileActivity = ProfileActivity.this;
+                    profileActivity.startActivity(new Intent(profileActivity, HomeActivity.class));
+                    ProfileActivity.this.finish();
+                    return;
                 }
-                else{
-                    pic();
-                }
+                ProfileActivity.this.pic();
             }
 
-            @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(ProfileActivity.this,"Check your Internet Connection",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "Check your Internet Connection", Toast.LENGTH_SHORT).show();
             }
         });
     }

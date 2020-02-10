@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent" xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <com.google.android.material.appbar.AppBarLayout android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent" android:background="@drawable/android_background"
+        android:id="@+id/app_bar_layout" android:theme="@style/AppTheme.AppBarOverlay">
+
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+    <androidx.appcompat.widget.Toolbar android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent" android:id="@+id/feed_toolbar"
+        app:popupTheme="@style/AppTheme.PopupOverlay" android:layout_weight="0.8"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:background="@drawable/round_fill" android:id="@+id/btn_publish"
+        android:layout_weight="0.2" android:text="Publish"/>
+
+</LinearLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
+
+
+    <ScrollView android:layout_height="match_parent" android:layout_width="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:id="@+id/tv_title_writting" android:text="No Title Available" android:layout_marginTop="20dp"
+        android:fontFamily="@font/ibm_plex_sans_bold" android:layout_centerHorizontal="true" android:gravity="center"
+        android:textColor="@color/black" android:textSize="25dp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_height="match_parent"
+        android:layout_width="match_parent" android:background="@drawable/edit_text_layout"
+        android:id="@+id/et_story2" android:layout_marginTop="20dp" style="@style/TextInputLayout"
+        android:layout_below="@+id/tv_title_writting">
+
+    <com.google.android.material.textfield.TextInputEditText android:layout_height="match_parent"
+        android:layout_width="match_parent" android:id="@+id/et_story"
+        android:fontFamily="@font/ibm_plex_sans_regular" android:textColor="@color/black" android:textSize="18sp"
+        style="@style/UpdateProfileEditText" android:inputType="none|text|textCapSentences|textMultiLine"
+        android:hint="Story"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:id="@+id/btn_save" android:text="Save Story" android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true" android:layout_below="@+id/et_story2"/>
+
+</RelativeLayout>
+
+</ScrollView>
+
+</RelativeLayout>

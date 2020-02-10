@@ -1,20 +1,18 @@
 package com.tenovaters.android.writer.Notification;
 
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
-import android.widget.Toast;
+import android.os.Build.VERSION;
 
 import androidx.core.app.NotificationCompat;
-
+import androidx.core.app.NotificationCompat.Builder;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.tenovaters.android.writer.HomeActivity;
 import com.tenovaters.android.writer.R;
-import com.tenovaters.android.writer.LoginActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 

@@ -77,7 +77,7 @@ public class AuthorDetailActivity extends AppCompatActivity {
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         this.mRecyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        this.mRecyclerView1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        this.mRecyclerView1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         this.upload = new ArrayList();
         this.upload1 = new ArrayList();
         if (!haveNetwork().booleanValue()) {

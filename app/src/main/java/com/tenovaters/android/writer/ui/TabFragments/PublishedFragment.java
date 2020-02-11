@@ -63,7 +63,7 @@ public class PublishedFragment extends Fragment {
                     }
                 }
                 if (PublishedFragment.this.mUploads.isEmpty()) {
-                    PublishedFragment.this.t1.setVisibility(View.INVISIBLE);
+                    PublishedFragment.this.t1.setVisibility(View.VISIBLE);
                 }
                 if (!PublishedFragment.this.mUploads.isEmpty()) {
                     PublishedFragment.this.t1.setVisibility(View.INVISIBLE);

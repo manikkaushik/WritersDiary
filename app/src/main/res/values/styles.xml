@@ -30,6 +30,8 @@
 
     <style name="UpdateProfileEditText">
         <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@color/white</item>
         <item name="android:layout_marginTop">20dp</item>

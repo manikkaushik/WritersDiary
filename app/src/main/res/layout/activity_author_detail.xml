@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="400dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -24,13 +24,13 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:fitsSystemWindows="true"
                 android:id="@+id/img_authordetal_collapsing"
-                app:layout_collapseMode="pin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/com_facebook_profile_picture_blank_portrait"/>
+                android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+                app:layout_collapseMode="pin" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -43,14 +43,5 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_author_detail" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

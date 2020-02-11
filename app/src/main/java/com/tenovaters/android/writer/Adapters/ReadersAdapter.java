@@ -1,303 +1,278 @@
 package com.tenovaters.android.writer.Adapters;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
+import android.os.Build.VERSION;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import com.facebook.appevents.AppEventsConstants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.tenovaters.android.writer.Database.CategoryList;
-import com.tenovaters.android.writer.Database.ReadersList;
 import com.tenovaters.android.writer.R;
-import com.tenovaters.android.writer.ReadersActivity;
+import com.tenovaters.android.writer.Database.ReadersList;
 
-import java.util.ArrayList;
+import com.tenovaters.android.writer.ReadersActivity;
 import java.util.List;
+
 
 public class ReadersAdapter extends RecyclerView.Adapter<ReadersAdapter.ImageViewHolder> {
 
-    private Context mContext;
-    private List<ReadersList> mUploads;
-
-
+    public static final int MAX_LINES = 2;
+    /* access modifiers changed from: private */
+    public Context mContext;
     private DatabaseReference mDatabaseRef;
-    private CategoryAdapter mAdapter;
-    private List<CategoryList> upload;
+    private List<ReadersList> mUploads;
+    private DatabaseReference rootref;
 
-
-
-    public ReadersAdapter(Context context, List<ReadersList> uploads) {
-        mContext = context;
-        mUploads = uploads;
-    }
-
-    @Override
-    public ReadersAdapter.ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.recycle_home, parent, false);
-        return new ReadersAdapter.ImageViewHolder(v);
-    }
-
-    @Override
-    public void onBindViewHolder(final ReadersAdapter.ImageViewHolder holder, int position) {
-        final ReadersList readersList = mUploads.get(position);
-
-
-        holder.title.setText(readersList.getTitle());
-        holder.authorname.setText(readersList.getAuthorname());
-        holder.story.setText(readersList.getStory());
-        holder.likes.setText(readersList.getLikes());
-        holder.views.setText(readersList.getViews());
-
-        final String category= readersList.getCategory();
-        if(category.equals("1")){
-            //Toast.makeText(mContext, "1", Toast.LENGTH_SHORT).show();
-            mDatabaseRef = FirebaseDatabase.getInstance().getReference("Reader").child(readersList.getId());
-            mDatabaseRef.child("Category").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    int i=0;
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        if(i==0){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv.setVisibility(View.VISIBLE);
-                            holder.categorytv.setText(value);
-                            i++;
-                        }
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    // mProgressCircle.setVisibility(View.INVISIBLE);
-                }
-            });
-
-        }
-        else if(category.equals("2")){
-           // Toast.makeText(mContext,"2", Toast.LENGTH_SHORT).show();
-            mDatabaseRef = FirebaseDatabase.getInstance().getReference("Reader").child(readersList.getId());
-            mDatabaseRef.child("Category").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    int i=0;
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        if(i==0){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv.setVisibility(View.VISIBLE);
-                            holder.categorytv.setText(value);
-                            i++;
-                        }
-                        if(i==2){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv1.setVisibility(View.VISIBLE);
-                            holder.categorytv1.setText(value);
-                            i++;
-                        }
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    // mProgressCircle.setVisibility(View.INVISIBLE);
-                }
-            });
-        }
-        else if(category.equals("3")){
-          //  Toast.makeText(mContext, "3", Toast.LENGTH_SHORT).show();
-            mDatabaseRef = FirebaseDatabase.getInstance().getReference("Reader").child(readersList.getId());
-            mDatabaseRef.child("Category").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    int i=0;
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        if(i==0){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv.setVisibility(View.VISIBLE);
-                            holder.categorytv.setText(value);
-                            i++;
-                        }
-                        else if(i==1){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv1.setVisibility(View.VISIBLE);
-                            holder.categorytv1.setText(value);
-                            i++;
-                        }
-                        else if(i==2){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv2.setVisibility(View.VISIBLE);
-                            holder.categorytv2.setText(value);
-                            i++;
-                        }
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    // mProgressCircle.setVisibility(View.INVISIBLE);
-                }
-            });
-        }
-        else{
-            //Toast.makeText(mContext, "5", Toast.LENGTH_SHORT).show();
-            mDatabaseRef = FirebaseDatabase.getInstance().getReference("Reader").child(readersList.getId());
-            mDatabaseRef.child("Category").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    int i=0;
-                    int remain = Integer.parseInt(category);
-                    remain=remain-3;
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        if(i==0){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv.setVisibility(View.VISIBLE);
-                            holder.categorytv.setText(value);
-                            i++;
-                        }
-                        else if(i==1){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv1.setVisibility(View.VISIBLE);
-                            holder.categorytv1.setText(value);
-                            i++;
-                        }
-                        else if(i==2){
-                            String value = postSnapshot.child("category").getValue(String.class);
-                            holder.categorytv2.setVisibility(View.VISIBLE);
-                            holder.categorytv2.setText(value);
-                            holder.categorytv3.setVisibility(View.VISIBLE);
-                            holder.categorytv3.setText("+"+remain+" more");
-                            i++;
-                        }
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    // mProgressCircle.setVisibility(View.INVISIBLE);
-                }
-            });
-        }
-
-
-       /*mDatabaseRef = FirebaseDatabase.getInstance().getReference("Reader").child(readersList.getId());
-        mDatabaseRef.child("Category").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                upload = new ArrayList<>();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    CategoryList workersdatabase = postSnapshot.getValue(CategoryList.class);
-                    upload.add(workersdatabase);
-
-                }
-                mAdapter = new CategoryAdapter(mContext,upload);
-                holder.mRecyclerView.setAdapter(mAdapter);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-               // mProgressCircle.setVisibility(View.INVISIBLE);
-            }
-        });*/
-
-       Picasso.with(mContext).load(readersList.getImage()).fit().centerCrop().into(holder.image);
-       /* holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"You clicked"+readersList.getTitle(),Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(mContext, ReadersActivity.class);
-                holder.image.buildDrawingCache();
-                Bitmap image = holder.image.getDrawingCache();
-                Bundle extras = new Bundle();
-                extras.putParcelable("imagebitmap", image);
-                intent.putExtras(extras);
-                intent.putExtra("Title",readersList.getTitle());
-                intent.putExtra("ID",readersList.getId());
-                intent.putExtra("Category",readersList.getCategory());
-                intent.putExtra("Auther Name",readersList.getAuthorname());
-                intent.putExtra("Description",readersList.getStory());
-                mContext.startActivity(intent);
-
-            }
-        }); */
-
-       holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               //Toast.makeText(mContext,"You clicked"+readersList.getTitle(),Toast.LENGTH_SHORT).show();
-               Intent intent=new Intent(mContext, ReadersActivity.class);
-               intent.putExtra("Title",readersList.getTitle());
-               intent.putExtra("ID",readersList.getId());
-               intent.putExtra("Auther Name",readersList.getAuthorname());
-               intent.putExtra("Description",readersList.getStory());
-               intent.putExtra("Image",readersList.getImage());
-               mContext.startActivity(intent);
-           }
-       });
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return mUploads.size();
-    }
-
-    public class ImageViewHolder extends RecyclerView.ViewHolder {
-        public TextView title,authorname,story,likes,views;
-        public ImageView image;
-        public Button request;
-        public RelativeLayout relativeLayout;
+    public class ImageViewHolder extends ViewHolder {
+        public TextView authorname;
         public CardView card;
-        public TextView categorytv,categorytv1,categorytv2,categorytv3;
-
-
-
+        public TextView categorytv;
+        public TextView categorytv1;
+        public TextView categorytv2;
+        public TextView categorytv3;
+        public ImageView image;
+        public TextView likes;
+        public RelativeLayout relativeLayout;
+        public Button request;
+        public TextView story;
+        public TextView title;
+        public TextView views;
 
         public ImageViewHolder(final View itemView) {
             super(itemView);
+            this.title = (TextView) itemView.findViewById(R.id.tv_title);
+            this.authorname = (TextView) itemView.findViewById(R.id.tv_authorname);
+            this.story = (TextView) itemView.findViewById(R.id.tv_story);
+            this.image = (ImageView) itemView.findViewById(R.id.img_bookimage);
+            this.likes = (TextView) itemView.findViewById(R.id.tv_likes);
+            this.views = (TextView) itemView.findViewById(R.id.tv_views);
+            this.categorytv = (TextView) itemView.findViewById(R.id.tv_category1);
+            this.categorytv1 = (TextView) itemView.findViewById(R.id.tv_category2);
+            this.categorytv2 = (TextView) itemView.findViewById(R.id.tv_category3);
+            this.categorytv3 = (TextView) itemView.findViewById(R.id.tv_categorymore);
+            this.relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativelayout_reader);
 
-
-            title = itemView.findViewById(R.id.tv_title);
-            authorname = itemView.findViewById(R.id.tv_authorname);
-            story = itemView.findViewById(R.id.tv_story);
-            image=itemView.findViewById(R.id.img_bookimage);
-            likes = itemView.findViewById(R.id.tv_likes);
-            views = itemView.findViewById(R.id.tv_views);
-            categorytv = itemView.findViewById(R.id.tv_category1);
-            categorytv1 = itemView.findViewById(R.id.tv_category2);
-            categorytv2 = itemView.findViewById(R.id.tv_category3);
-            categorytv3 = itemView.findViewById(R.id.tv_categorymore);
-
-            //mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-           // mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-            relativeLayout=itemView.findViewById(R.id.relativelayout_reader);
-
-
-
-
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
+            itemView.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
+
                     itemView.getContext().startActivity(new Intent(itemView.getContext(), ReadersActivity.class));
+
                 }
             });
         }
+    }
+
+    public ReadersAdapter(Context context, List<ReadersList> uploads) {
+
+        this.mContext = context;
+        this.mUploads = uploads;
+    }
+
+
+    public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        return new ImageViewHolder(LayoutInflater.from(this.mContext).inflate(R.layout.recycle_home, parent, false));
+    }
+
+
+    public void onBindViewHolder(final ImageViewHolder holder, int position) {
+        final ReadersList readersList = (ReadersList) this.mUploads.get(position);
+        this.rootref = FirebaseDatabase.getInstance().getReference("Users").child(readersList.getAuthorid());
+        this.rootref.addValueEventListener(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = (String) dataSnapshot.child("name").getValue(String.class);
+                if (value != null) {
+                    holder.authorname.setText(value);
+                }
+
+            }
+
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(ReadersAdapter.this.mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        final String discription = readersList.getDescription();
+        holder.title.setText(readersList.getTitle());
+        holder.story.setText(discription);
+        holder.likes.setText(readersList.getLikes());
+        holder.views.setText(readersList.getViews());
+        holder.story.post(new Runnable() {
+            public void run() {
+                if (holder.story.getLineCount() > 2) {
+                    int lastCharShown = holder.story.getLayout().getLineVisibleEnd(1);
+                    holder.story.setMaxLines(2);
+                    String moreString = "More";
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("  ");
+                    sb.append(moreString);
+                    String suffix = sb.toString();
+                    StringBuilder sb2 = new StringBuilder();
+                    sb2.append(discription.substring(0, (lastCharShown - suffix.length()) - 3));
+                    sb2.append("...");
+                    sb2.append(suffix);
+                    String actionDisplayText = sb2.toString();
+                    SpannableString truncatedSpannableString = new SpannableString(actionDisplayText);
+                    int startIndex = actionDisplayText.indexOf(moreString);
+                    if (VERSION.SDK_INT >= 23) {
+                        truncatedSpannableString.setSpan(new ForegroundColorSpan(ReadersAdapter.this.mContext.getColor(R.color.blue)), startIndex, moreString.length() + startIndex, 33);
+                    }
+                    holder.story.setText(truncatedSpannableString);
+                }
+            }
+        });
+        final String category = readersList.getCategory();
+        String str = "Category";
+        String str2 = "Readers";
+        if (category.equals(AppEventsConstants.EVENT_PARAM_VALUE_YES)) {
+            this.mDatabaseRef = FirebaseDatabase.getInstance().getReference(str2).child(readersList.getAuthorid()).child(readersList.getId());
+            this.mDatabaseRef.child(str).addValueEventListener(new ValueEventListener() {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int i = 0;
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        if (i == 0) {
+                            String value = (String) postSnapshot.child("category").getValue(String.class);
+                            holder.categorytv.setVisibility(View.VISIBLE);
+                            holder.categorytv.setText(value);
+                            i++;
+                        }
+                    }
+                }
+
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(ReadersAdapter.this.mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else if (category.equals("2")) {
+            this.mDatabaseRef = FirebaseDatabase.getInstance().getReference(str2).child(readersList.getAuthorid()).child(readersList.getId());
+            this.mDatabaseRef.child(str).addValueEventListener(new ValueEventListener() {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int i = 0;
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        String str = "category";
+                        if (i == 0) {
+                            String value = (String) postSnapshot.child(str).getValue(String.class);
+                            holder.categorytv.setVisibility(View.VISIBLE);
+                            holder.categorytv.setText(value);
+                            i++;
+                        }
+                        if (i == 1) {
+                            String value2 = (String) postSnapshot.child(str).getValue(String.class);
+                            holder.categorytv1.setVisibility(View.VISIBLE);
+                            holder.categorytv1.setText(value2);
+                            i++;
+                        }
+                    }
+                }
+
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(ReadersAdapter.this.mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else if (category.equals("3")) {
+            this.mDatabaseRef = FirebaseDatabase.getInstance().getReference(str2).child(readersList.getAuthorid()).child(readersList.getId());
+            this.mDatabaseRef.child(str).addValueEventListener(new ValueEventListener() {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int i = 0;
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        String str = "category";
+                        if (i == 0) {
+                            String value = (String) postSnapshot.child(str).getValue(String.class);
+                            holder.categorytv.setVisibility(View.VISIBLE);
+                            holder.categorytv.setText(value);
+                            i++;
+                        } else if (i == 1) {
+                            String value2 = (String) postSnapshot.child(str).getValue(String.class);
+                            holder.categorytv1.setVisibility(View.VISIBLE);
+                            holder.categorytv1.setText(value2);
+                            i++;
+                        } else if (i == 2) {
+                            String value3 = (String) postSnapshot.child(str).getValue(String.class);
+                            holder.categorytv2.setVisibility(View.VISIBLE);
+                            holder.categorytv2.setText(value3);
+                            i++;
+                        }
+                    }
+                }
+
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(ReadersAdapter.this.mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            this.mDatabaseRef = FirebaseDatabase.getInstance().getReference(str2).child(readersList.getAuthorid()).child(readersList.getId());
+            this.mDatabaseRef.child(str).addValueEventListener(new ValueEventListener() {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int i = 0;
+                    int remain = Integer.parseInt(category) - 3;
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        String str = "category";
+                        if (i == 0) {
+                            String value = (String) postSnapshot.child(str).getValue(String.class);
+                            holder.categorytv.setVisibility(View.VISIBLE);
+                            holder.categorytv.setText(value);
+                            i++;
+                        } else if (i == 1) {
+                            String value2 = (String) postSnapshot.child(str).getValue(String.class);
+                            holder.categorytv1.setVisibility(View.VISIBLE);
+                            holder.categorytv1.setText(value2);
+                            i++;
+                        } else if (i == 2) {
+                            String value3 = (String) postSnapshot.child(str).getValue(String.class);
+                            holder.categorytv2.setVisibility(View.VISIBLE);
+                            holder.categorytv2.setText(value3);
+                            holder.categorytv3.setVisibility(View.VISIBLE);
+                            TextView textView = holder.categorytv3;
+                            StringBuilder sb = new StringBuilder();
+                            sb.append("+");
+                            sb.append(remain);
+                            sb.append(" more");
+                            textView.setText(sb.toString());
+                            i++;
+                        }
+                    }
+                }
+
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(ReadersAdapter.this.mContext, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        Picasso.with(this.mContext).load(readersList.getImage()).fit().into(holder.image);
+        holder.relativeLayout.setOnClickListener(new OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(ReadersAdapter.this.mContext, ReadersActivity.class);
+                intent.putExtra("Title", readersList.getTitle());
+                intent.putExtra("Views", readersList.getViews());
+                intent.putExtra("Comment", readersList.getComment());
+                intent.putExtra("ID", readersList.getId());
+                intent.putExtra("Auther Name", readersList.getAuthorname());
+                intent.putExtra("Description", readersList.getDescription());
+                intent.putExtra("Image", readersList.getImage());
+                intent.putExtra("Author Id", readersList.getAuthorid());
+                ReadersAdapter.this.mContext.startActivity(intent);
+            }
+        });
+    }
+
+    public int getItemCount() {
+        return this.mUploads.size();
     }
 }

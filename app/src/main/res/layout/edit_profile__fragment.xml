@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true" android:layout_marginTop="20dp"
         android:id="@+id/relative_first" android:layout_gravity="center" android:gravity="center">
 
-    <p013de.hdodenhof.circleimageview.CircleImageView android:layout_height="200dp"
+    <de.hdodenhof.circleimageview.CircleImageView android:layout_height="200dp"
         android:layout_width="200dp" android:layout_centerHorizontal="true"
         android:id="@+id/circle_profile_edit" android:src="@drawable/ic_profile"/>
 
@@ -35,14 +35,20 @@
         android:layout_marginBottom="20dp" android:layout_below="@+id/relative_first">
 
 
-    <com.google.android.material.textfield.TextInputLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:layout_marginTop="30dp" android:id="@+id/ti_name"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp" android:id="@+id/ti_name"
         style="@style/TextInputLayout" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"
         android:background="@drawable/edit_text_layout">
 
-    <com.google.android.material.textfield.TextInputEditText android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:id="@+id/et_name_edit" style="@style/UpdateProfileEditText"
-        android:fontFamily="@font/ibm_plex_sans_regular" android:inputType="textCapSentences"
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/et_name_edit"
+        style="@style/UpdateProfileEditText"
+        android:fontFamily="@font/ibm_plex_sans_regular"
+        android:inputType="textCapSentences"
         android:hint="Username" android:textColor="@color/black"/>
 
 </com.google.android.material.textfield.TextInputLayout>

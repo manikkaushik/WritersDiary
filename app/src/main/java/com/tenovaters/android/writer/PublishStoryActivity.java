@@ -142,7 +142,7 @@ public class PublishStoryActivity extends AppCompatActivity {
         this.f579b2 = (Button) findViewById(R.id.btn_uploadpdf);
         this.mRecyclerView = (RecyclerView) findViewById(R.id.recycler_publish);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        this.mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        this.mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         this.mStorageReference = FirebaseStorage.getInstance().getReference("Readers Story").child(this.currentUser).child(this.story_id);
         this.progressBar = (ProgressBar) findViewById(R.id.pro_publish);
         this.f578b1.setOnClickListener(new OnClickListener() {

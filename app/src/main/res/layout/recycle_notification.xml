@@ -5,7 +5,7 @@
     android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp">
     <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_marginTop="5dp">
-        <p013de.hdodenhof.circleimageview.CircleImageView android:id="@+id/img_notification"
+        <de.hdodenhof.circleimageview.CircleImageView android:id="@+id/img_notification"
             android:layout_width="40dp" android:layout_height="40dp" android:layout_marginLeft="10dp"
             android:src="@drawable/com_facebook_profile_picture_blank_portrait"/>
         <LinearLayout android:orientation="vertical" android:layout_width="match_parent"

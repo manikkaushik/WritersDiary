@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29
@@ -46,11 +47,19 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    //compressor
     implementation 'id.zelory:compressor:2.1.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
+    //pdf viewer
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    //pdf_creator
     implementation files('libs/itext-pdf.jar')
     implementation files('libs/itextpdf-5.1.0.jar')
+
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
 }
 apply plugin: 'com.google.gms.google-services'
